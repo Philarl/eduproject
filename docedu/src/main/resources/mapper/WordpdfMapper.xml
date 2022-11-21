@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wordpdf">
+	<insert id="wordpdfinsert" parameterType="com.docedu.web.user.vo.WordpdfVO">
+		insert into wordpdf(wpdf_header, wpdf_name, wpdf_trans)
+		values
+		<foreach collection="list" item="item" separator=" , ">
+			(#{item.wpdf_header},#{item.wpdf_name},#{item.wpdf_trans})
+		</foreach>
+	</insert>
+	<select id="wordpdfview" resultType="com.docedu.web.user.vo.WordpdfVO">
+		select * from wordpdf Where wpdf_header = #{wpdf_header};
+	</select>
+	<select id="wordpdfviewList" resultType="com.docedu.web.user.vo.WordpdfVO">
+		select distinct wpdf_header from wordpdf;
+	</select>
+</mapper>

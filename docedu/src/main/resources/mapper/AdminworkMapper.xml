@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminwork">
+	<insert id="adminworkinsert" parameterType="com.docedu.web.admin.vo.AdminworkVO">
+		
+	</insert>
+	<select id="adminworkselectbyfix" resultType="com.docedu.web.admin.vo.AdminworkVO">
+		select * from adminwork_table where adminwork_type = 'fix';
+	</select>
+	<select id="adminworkselectbyexpected" resultType="com.docedu.web.admin.vo.AdminworkVO">
+		select * from adminwork_table where adminwork_type = 'expected';
+	</select>
+	<select id="adminworkselectbyday" resultType="com.docedu.web.admin.vo.AdminworkVO">
+		select * from adminwork_table where adminwork_type = 'day';
+	</select>
+	<select id="adminworkselectbymonthly" resultType="com.docedu.web.admin.vo.AdminworkVO">
+		select * from adminwork_table where adminwork_type = 'monthly';
+	</select>
+</mapper>
