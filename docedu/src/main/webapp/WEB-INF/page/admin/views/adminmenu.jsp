@@ -388,7 +388,7 @@ p.btn_next {
 		    </div>
 		</div>
 		<div class="downloadarea">
-			<button class="hongbobtn">홍보자료 다운로드</button>
+			<button class="hongbobtn" onclick="location.href='materiallist.mdo'">홍보자료 다운로드</button>
 		</div>
 	</div>
 	<div class="menuarea">
@@ -442,7 +442,7 @@ p.btn_next {
 		</div>
 		<div class="menuline7">
 			<div class="dummy"></div>
-			<div class="normalmenu" onclick="location.href='sendmessage.mdo'">알림장전송</div>
+			<div class="normalmenu" onclick="location.href='sendcarrot.mdo'">알림장전송</div>
 			<div class="dummy"></div>
 			<div class="dummy"></div>
 		</div>

@@ -15,6 +15,7 @@ public class AdminVO {
 	private String admin_phone3;
 	private String admin_email;
 	private String admin_academy;
-	private int admin_tier;
+	private String admin_access;
+	private String admin_tier;
 	private Timestamp admin_date;
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.docedu.web.admin.vo.GrammarVO;
 import com.docedu.web.user.dao.BoardDAO;
 import com.docedu.web.user.vo.Criteria;
-import com.docedu.web.user.vo.PrintimsiVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -15,15 +15,11 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List<PrintimsiVO> printboard_page(Criteria cr) {
-		return boardDAO.printboard_page(cr);
+	public List<GrammarVO> showgrammar_page(Criteria cr) {
+		return boardDAO.showgrammar_page(cr);
 	}
 	@Override
-	public void printInsert(PrintimsiVO printimsiVO) {
-		boardDAO.printinsert(printimsiVO);
-	}
-	@Override
-	public PrintimsiVO piread(int pi_seq) {
-		return boardDAO.piread(pi_seq);
+	public List<Object> grammarread(String grammar_title) {
+		return boardDAO.grammarread(grammar_title);
 	}
 }

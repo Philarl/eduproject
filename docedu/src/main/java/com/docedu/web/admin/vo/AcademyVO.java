@@ -11,6 +11,9 @@ public class AcademyVO {
 	private String academy_phone1;
 	private String academy_phone2;
 	private String academy_phone3;
+	private String academy_postcode;
 	private String academy_address;
+	private String academy_detailaddress;
+	private String academy_extraaddress;
 	private Timestamp academy_date;
 }

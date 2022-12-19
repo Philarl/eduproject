@@ -17,12 +17,12 @@ public class AdminDAO {
 		return sqlSessionTemplate.selectOne("admin.getAdmin", adminVO);
 	}
 	
-	public boolean adminloginCheck(AdminVO adminVO) {
-		String name = sqlSessionTemplate.selectOne("admin.loginCheck", adminVO);
-		return (name == null) ? false : true;
+	//로그인 
+	public AdminVO adminloginCheck(String adminid) {
+		return sqlSessionTemplate.selectOne("admin.adminloginCheck",adminid);
 	}
-	public void adminregister(AdminVO adminVO) {
-		sqlSessionTemplate.insert("admin.admin_register",adminVO);
+	public int adminregister(AdminVO adminVO) {
+		return sqlSessionTemplate.insert("admin.admin_register",adminVO);
 	}
 	public void logout(HttpSession session) {
 	}

@@ -5,7 +5,6 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="PrintimsiVO" type="com.docedu.web.user.vo.PrintimsiVO"/>
 		<typeAlias alias="TendencyVO" type="com.docedu.web.user.vo.TendencyVO"/>
 		<typeAlias alias="SchoolmatchVO" type="com.docedu.web.user.vo.SchoolmatchVO"/>
 		<typeAlias alias="UserVO" type="com.docedu.web.user.vo.UserVO"/>
@@ -16,11 +15,12 @@
 		<typeAlias alias="NoticeVO" type="com.docedu.web.admin.vo.NoticeVO"/>
 		<typeAlias alias="MaterialVO" type="com.docedu.web.admin.vo.MaterialVO"/>
 		<typeAlias alias="AcademyVO" type="com.docedu.web.admin.vo.AcademyVO"/>
+		<typeAlias alias="LectureVO" type="com.docedu.web.admin.vo.LectureVO"/>
+		<typeAlias alias="GrammarVO" type="com.docedu.web.admin.vo.GrammarVO"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/UserMapper.xml"/>
-		<mapper resource="mapper/PrintMapper.xml"/>
 		<mapper resource="mapper/TendencyMapper.xml"/>
 		<mapper resource="mapper/SchoolmatchMapper.xml"/>
 		<mapper resource="mapper/ArrangementMapper.xml"/>
@@ -30,5 +30,7 @@
 		<mapper resource="mapper/AdminnoticeMapper.xml"/>
 		<mapper resource="mapper/AdminmaterialMapper.xml"/>
 		<mapper resource="mapper/AcademyMapper.xml"/>
+		<mapper resource="mapper/LectureMapper.xml"/>
+		<mapper resource="mapper/GrammarMapper.xml"/>
 	</mappers>
 </configuration>

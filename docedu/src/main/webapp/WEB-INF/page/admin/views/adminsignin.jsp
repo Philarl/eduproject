@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 
 <head>
@@ -38,7 +38,21 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form name="form1" method="post" action="/admin_register.do">
+                            <form name="form1" method="post" action="/admin_register.mdo">
+                            	<div class="form-group row">
+                            		<div class="col-sm-6 mb-3 mb-sm-0">
+                            			<div class="form-control form-control-user">
+	                            			<input type="radio" name="admin_tier" value="head">
+	                            			<label>학원장으로 가입</label>
+                            			</div>
+                            		</div>
+                            		<div class="col-sm-6">
+                            			<div class="form-control form-control-user">
+	                            			<input type="radio" name="admin_tier" value="teacher">
+	                            			<label>선생님으로 가입</label>
+                            			</div>
+                                    </div>
+                            	</div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="admin_id" name="admin_id"
@@ -59,8 +73,12 @@
                                             placeholder="NAME">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="admin_academy"
-                                            placeholder="ACADEMY">
+                                        <select class="form-control form-control-user" id="exampleLastName" name="admin_academy">
+                                        	<option value="">ACADEMY</option>
+                                        	<c:forEach var="list" items="${AcademysigninList}" varStatus="status">
+                                        		<option value="${list.academy_name}">${list.academy_name}</option>
+                                        	</c:forEach>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">

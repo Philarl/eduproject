@@ -14,24 +14,23 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDAO adminDAO;
 	
+	public AdminServiceImpl(AdminDAO adminDAO) {
+		this.adminDAO = adminDAO;
+	}
+	
 	@Override
 	public AdminVO getAdmin(AdminVO adminVO) {
 		return adminDAO.getAdmin(adminVO);
 	}
 	
+	//로그인
 	@Override
-	public boolean adminloginCheck(AdminVO adminVO, HttpSession session) {
-		boolean result = adminDAO.adminloginCheck(adminVO);
-		if (result) {
-			AdminVO vo2 = getAdmin(adminVO);
-			session.setAttribute("admin_id", vo2.getAdmin_id());
-			session.setAttribute("admin_password", vo2.getAdmin_password());
-		}
-		return result;
+	public AdminVO adminloginCheck(String adminid) {
+		return adminDAO.adminloginCheck(adminid);
 	}
 	@Override
-	public void adminregister(AdminVO adminVO) {
-		adminDAO.adminregister(adminVO);
+	public int adminregister(AdminVO adminVO) {
+		return adminDAO.adminregister(adminVO);
 	}
 	
 	@Override

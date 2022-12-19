@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lecture">
+	<insert id="lectureinsert" parameterType="com.docedu.web.admin.vo.LectureVO">
+		insert into lecture_table(lecture_name, lecture_movie1, lecture_movie2, lecture_movie3, lecture_movie4, lecture_movie5, lecture_movie6, lecture_movie7, lecture_movie8, lecture_movie9, lecture_movie10)
+		values(#{lecture_name}, #{lecture_movie1}, #{lecture_movie2}, #{lecture_movie3}, #{lecture_movie4}, #{lecture_movie5}, #{lecture_movie6}, #{lecture_movie7}, #{lecture_movie8}, #{lecture_movie9}, #{lecture_movie10});
+	</insert>
+</mapper>

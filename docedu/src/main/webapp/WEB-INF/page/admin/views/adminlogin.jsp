@@ -22,6 +22,10 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/css/admin/sb-admin-2.min.css" rel="stylesheet">
+    <!--alert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
 </head>
 
@@ -83,8 +87,83 @@
 					$("#admin_password").focus();
 					return;
 				}
-				document.form1.action="/adminloginCheck.mdo";
-				document.form1.submit();
+				if (admin_id != "" && admin_password != "") {
+				      $.ajax({
+				         type: "POST",
+				         data: {
+				            "adminid": admin_id,
+				            "adminpassword": admin_password
+				         },
+				         url: "/adminloginCheck.mdo",
+				         dataType: "json",
+				         success: function(result) {
+				            if (result.msg == "status") {
+							    swal({
+									title: "로그인 불가.",
+									text: "서류심사가 완료되지 않았습니다.",
+									icon : "info",
+								}, function(){
+									location.reload();
+								});
+				            } else if (result.msg == "idFail") {
+				               swal({
+									title: "로그인 실패.",
+									text: "아이디가 없습니다. 아이디를 확인해 주세요.",
+									icon : "error",
+								}, function(){
+									location.reload();
+								});
+				            } else if (result.msg == "head_success") {
+				                swal({
+									title: "로그인 성공.",
+									icon : "success",
+									text: "환영합니다. 학원장으로 로그인 되었습니다.",
+								}, function(){			
+									window.location.href ="/adminmenu.mdo";
+								});
+				               
+				            } else if (result.msg == "teacher_success") {
+				                swal({
+									title: "로그인 성공.",
+									icon : "success",
+									text: "환영합니다. 교사로 로그인 되었습니다.",
+								}, function(){			
+									window.location.href ="/adminmenu.mdo";
+								});
+				               
+				            } else if (result.msg == "pwFail") {
+				               swal({
+									title: "로그인 실패.",
+									icon : "error",
+									text: "비밀번호가 일치하지 않습니다. 비밀번호를 확인하세요."
+								}, function(){
+									location.reload();
+								});
+				            } else if(result.msg == "deleteMember"){
+				            	swal({
+									title: "로그인 실패.",
+									icon : "error",
+									text: "탈퇴 된 아이디입니다.\n 6개월 후 사용가능하며, 다른 아이디로 가입해주세요 \n 회원가입으로 이동합니다."
+								}, function(){
+									window.location.href ="/adminsignin.mdo";
+								});
+				            } else {
+				                swal({
+									title: "로그인 성공.",
+									text: "환영합니다. 최고관리자로 로그인 되었습니다.",
+									icon : "success",
+								}, function(){
+									window.location.href ="/adminmenu.mdo";				
+								});
+				            }
+
+				         },
+				         error: function(error) {
+				            alert("error : " + error);
+				         }
+				      });
+
+				   }
 			});
 		});
 	</script>

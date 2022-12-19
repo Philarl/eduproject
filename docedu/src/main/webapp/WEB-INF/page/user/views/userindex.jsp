@@ -262,7 +262,7 @@ p.btn_next {
 	        <div class="dropdowncontent">
 	        	<p style="margin-top:10px;" onclick="location.href='studentschedule.do'">진도계획표</p>
 	        	<p style="margin-top:10px;">학습알림장</p>
-	        	<p style="margin-top:10px;">대회랭킹</p>
+	        	<p style="margin-top:10px;">오답관리</p>
 	        </div>
 	    </div>
 		<div class="dropdownoption">
@@ -271,7 +271,7 @@ p.btn_next {
 		        <span class="dropbtn"><i>교재컨텐츠</i></span>
 			</div>
 	        <div class="dropdowncontent">
-	            <p style="margin-top:10px;"><span onclick="location.href='home.do';">문법</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>독해</span> </p>
+	            <p style="margin-top:10px;"><span onclick="location.href='grammarlist.do';">독해</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>문법</span> </p>
 	            <p style="margin-top:10px;"><span>듣기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>내신</span></p>
 	            <p style="margin-top:10px;"><span>영작</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="location.href='wordpdflist.do';">단어</span></p>
 	            <p style="margin-top:10px;">파닉스</p>
@@ -285,7 +285,6 @@ p.btn_next {
 			</div>
 	        <div class="dropdowncontent">
 	            <p style="margin-top:10px;" onclick="location.href='mylecture.do'">강의영상</p>
-	            <p style="margin-top:10px;">오답관리</p>
 	        </div>
 	    </div>
 	</div>

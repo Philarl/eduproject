@@ -52,7 +52,7 @@ public class AcademyController {
 	public String academy_insertGet(@ModelAttribute AcademyVO academyVO) {
 		academyService.academyInsert(academyVO);
 //		System.out.println(ad_encyVO.toString());
-		return "redirect:/academylist.mdo";
+		return "redirect:/accessacademy.mdo";
 	}
 	@RequestMapping("/academyview.mdo")
 	public ModelAndView getacademyGet(@RequestParam int academy_seq,HttpSession session) {
@@ -65,6 +65,16 @@ public class AcademyController {
 		AcademyVO academyVO;
 		academyVO = academyService.academyread(academy_seq);
 		mav.addObject("academy_view", academyVO);
+		return mav;
+	}
+
+	@RequestMapping(value = "/adminsignin.mdo")
+	public ModelAndView adminsigninGet(Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Criteria cr = null;
+		List<AcademyVO> showList = new ArrayList<AcademyVO>();
+		showList = academyService.academylist(cr);
+		mav.addObject("AcademysigninList", showList);
 		return mav;
 	}
 }

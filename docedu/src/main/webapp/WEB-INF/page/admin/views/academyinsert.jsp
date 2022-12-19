@@ -372,32 +372,19 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">학습센터</h6>
-                            <button class="shadow-sm bg-body rounded" id="">학습센터 추가</button>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>seq</th>
-                                            <th>학원 이름</th>
-                                            <th>대표 번호</th>
-                                            <th>주소</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>김지민영어학원</td>
-                                            <td>02-0000-0000</td>
-                                            <td>서울시 노원구 한글비석로</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    	<form id="form1" name="NoticeVO" method="POST" onsubmit="return onclickOk()" action="/insertacademy.mdo">
+	                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+	                            <h6 class="m-0 font-weight-bold text-primary">학습센터 추가</h6>
+	                            <input type="submit" class="shadow-sm bg-body rounded" id="" value="학습센터 등록">
+	                        </div>
+	                        <div class="card-body">
+                               	학원 이름 : <input type="text" name="academy_name"><br><br>
+                               	대표 번호 : <input type="text" name="academy_phone1">-<input type="text" name="academy_phone2">-<input type="text" name="academy_phone3"><br><br>
+                               	우편 번호 : <input type="text" name="academy_postcode" id="sample6_postcode" readonly><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br><br>
+                               	주소 : <input type="text" name="academy_address" id="sample6_address" readonly><br><br>
+                               	상세 주소 : <input type="text" name="academy_detailaddress" id="sample6_detailAddress"><input type="text" name="academy_extraaddress" id="sample6_extraAddress" placeholder="참고항목" readonly>
+	                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -445,33 +432,7 @@
         </div>
     </div>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="inforModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">학습센터 세부정보</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="modalac logo"><img class ="logoimg"src="logotest1.jpg"></div>
-                    <div class="modalac name">학원명 : 김지민영어학원</div>
-                    <div class="modalac admin">대표자명 : 김영주</div>
-                    <div class="modalac number">학원 번호 : 02-0000-0000</div>
-                    <div class="modalac phone">대표자 번호 : 010-0000-0000</div>
-                    <div class="modalac adress1">주소 : 서울특별시 노원구 한글비석로 265</div>
-                    <div class="modalac adress2">상세주소 : 중계동, 영광프라자 7층</div>
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Bootstrap core JavaScript-->
     <script src="/resources/js/admin/jquery.min.js"></script>
@@ -489,7 +450,56 @@
 
     <!-- Page level custom scripts -->
     <script src="/resources/js/admin/datatables-demo.js"></script>
+    
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script>
+	    function sample6_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+	
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+	
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
+	
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	            }
+	        }).open();
+	    }
         function rowDelsave(obj){
             var tr = obj.parentNode.parentNode;
             tr.parentNode.removeChild(tr);

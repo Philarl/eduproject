@@ -17,14 +17,6 @@ public class AdminCommonController {
 	public String assignmentclassGet() {
 		return "assignmentclass";
 	}
-	@GetMapping("/maincontent.mdo")
-	public String maincontentGet() {
-		return "maincontent";
-	}
-	@GetMapping("/mainlecture.mdo")
-	public String mainlectureGet() {
-		return "mainlecture";
-	}
 	@GetMapping("/sendmessage.mdo")
 	public String sendmessageGet() {
 		return "sendmessage";
