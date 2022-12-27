@@ -419,7 +419,7 @@
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h3 class="m-0 font-weight-bold text-primary">영작</h3>
                                     <div class="dropdown no-arrow">
-                                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">교재 추가</a>
+                                        <a href="transinsert.mdo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">교재 추가</a>
                                     </div>
                                 </div>
                             </div>

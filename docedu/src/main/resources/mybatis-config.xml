@@ -17,6 +17,10 @@
 		<typeAlias alias="AcademyVO" type="com.docedu.web.admin.vo.AcademyVO"/>
 		<typeAlias alias="LectureVO" type="com.docedu.web.admin.vo.LectureVO"/>
 		<typeAlias alias="GrammarVO" type="com.docedu.web.admin.vo.GrammarVO"/>
+		<typeAlias alias="CarrotVO" type="com.docedu.web.admin.vo.CarrotVO"/>
+		<typeAlias alias="TransVO" type="com.docedu.web.admin.vo.TransVO"/>
+		<typeAlias alias="ImsiVO" type="com.docedu.web.user.vo.ImsiVO"/>
+		<typeAlias alias="WordcollectionVO" type="com.docedu.web.user.vo.WordcollectionVO"/>
 	</typeAliases>
 	
 	<mappers>
@@ -32,5 +36,9 @@
 		<mapper resource="mapper/AcademyMapper.xml"/>
 		<mapper resource="mapper/LectureMapper.xml"/>
 		<mapper resource="mapper/GrammarMapper.xml"/>
+		<mapper resource="mapper/CarrotMapper.xml"/>
+		<mapper resource="mapper/TransMapper.xml"/>
+		<mapper resource="mapper/ImsiMapper.xml"/>
+		<mapper resource="mapper/WordcollectionMapper.xml"/>
 	</mappers>
 </configuration>

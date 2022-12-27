@@ -31,4 +31,14 @@ public class ContentController {
 		sqlSessionTemplate.insert("grammar.grammarinsert",param);
 		return param;
 	}
+	@GetMapping("/transinsert.mdo")
+	public String transinsertGet() {
+		return "transinsert";
+	}
+	@ResponseBody
+    @RequestMapping(value = "/inserttrans.mdo", method = RequestMethod.POST)
+	public List<Map<String, Object>> inserttrans(@RequestBody List<Map<String, Object>> param) {
+		sqlSessionTemplate.insert("trans.transinsert",param);
+		return param;
+	}
 }

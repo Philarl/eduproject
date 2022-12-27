@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wordcollection">
+	<select id="wordgrammar" resultType="com.docedu.web.user.vo.WordcollectionVO">
+		select * from wordcollection where word_difficulty = 8 or word_difficulty = 9;
+	</select>
+</mapper>

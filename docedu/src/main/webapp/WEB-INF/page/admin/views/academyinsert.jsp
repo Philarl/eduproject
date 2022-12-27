@@ -372,7 +372,7 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                    	<form id="form1" name="NoticeVO" method="POST" onsubmit="return onclickOk()" action="/insertacademy.mdo">
+                    	<form id="form1" name="AcademyVO" method="POST" onsubmit="return onclickOk()" action="/insertacademy.mdo">
 	                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 	                            <h6 class="m-0 font-weight-bold text-primary">학습센터 추가</h6>
 	                            <input type="submit" class="shadow-sm bg-body rounded" id="" value="학습센터 등록">

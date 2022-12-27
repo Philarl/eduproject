@@ -9,8 +9,4 @@ public class CommonController {
 	public String studentscheduleGet() {
 		return "studentschedule";
 	}
-	@GetMapping("/mylecture.do")
-	public String mylectureGet() {
-		return "mylecture";
-	}
 }

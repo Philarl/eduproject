@@ -352,16 +352,7 @@
                         </div>
                         <div class="card-body">
                               	강의 제목 : <input type="text" name="lecture_name" id="name"><br><br>
-                              	강의 1 : <input type="file" name="lecture_movie1" id="movie1"><br><br>
-                              	강의 2 : <input type="file" name="lecture_movie2" id="movie2"><br><br>
-                              	강의 3 : <input type="file" name="lecture_movie3" id="movie3"><br><br>
-                              	강의 4 : <input type="file" name="lecture_movie4" id="movie4"><br><br>
-                              	강의 5 : <input type="file" name="lecture_movie5" id="movie5"><br><br>
-                              	강의 6 : <input type="file" name="lecture_movie6" id="movie6"><br><br>
-                              	강의 7 : <input type="file" name="lecture_movie7" id="movie7"><br><br>
-                              	강의 8 : <input type="file" name="lecture_movie8" id="movie8"><br><br>
-                              	강의 9 : <input type="file" name="lecture_movie9" id="movie9"><br><br>
-                              	강의 10 : <input type="file" name="lecture_movie10" id="movie10"><br><br>
+                              	강의 링크 : <input type="text" name="lecture_link" id="movie1"><br><br>
                         </div>
                     </div>
                 </div>
@@ -422,32 +413,16 @@
     <script src="/resources/js/admin/sb-admin-2.min.js"></script>
 	<script>
 		$('#testbtn').click(function(){
-			var name1 = $('#name').val();
-			var movie1 = $('#movie1').val();
-			var movie2 = $('#movie2').val();
-			var movie3 = $('#movie3').val();
-			var movie4 = $('#movie4').val();
-			var movie5 = $('#movie5').val();
-			var movie6 = $('#movie6').val();
-			var movie7 = $('#movie7').val();
-			var movie8 = $('#movie8').val();
-			var movie9 = $('#movie9').val();
-			var movie10 = $('#movie10').val();
+			var name = $('#name').val();
+			var link = $('#movie1').val();
+			let split = link.split('"');
+			var linkresult = split[5];
 			$.ajax({
 				url : "insertlecture.mdo",
 				type : "post",
 				data : {
 					lecture_name : name,
-					lecture_movie1 : movie1,
-					lecture_movie2 : movie2,
-					lecture_movie3 : movie3,
-					lecture_movie4 : movie4,
-					lecture_movie5 : movie5,
-					lecture_movie6 : movie6,
-					lecture_movie7 : movie7,
-					lecture_movie8 : movie8,
-					lecture_movie9 : movie9,
-					lecture_movie10 : movie10,
+					lecture_link : linkresult
 				},
 				success : function(data) {
 					alert("success!");

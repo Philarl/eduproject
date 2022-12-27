@@ -47,6 +47,7 @@ img{
     resize: none;
     font-size:1.6783vw;
     border: 0;
+    word-break: break-all;
 }
 .categoryarea1{
 	position: absolute;
@@ -57,6 +58,15 @@ img{
 	width: 10.8392vw;
 	border: 0;
 	font-size:1.1189vw;
+    color:#F3B3A1;
+}
+.wordlistarea1{
+	position: absolute;
+    border: 1px solid black;
+    top: 8.2%;
+    left: 52%;
+    width: 43.5%;
+    height: 11.7%;
 }
 .viewmorearea1{
 	position: absolute;
@@ -70,6 +80,7 @@ img{
 .viewmorebox{
     border: 0;
     font-size: 1.6783vw;
+    word-break: break-all;
 }
 .contentarea2{
 	position: absolute;
@@ -83,6 +94,14 @@ img{
     left: 37.5%;
     top: 52.4%;
 }
+.wordlistarea2{
+	position: absolute;
+    border: 1px solid black;
+    top: 54.6%;
+    left: 52%;
+    width: 43.5%;
+    height: 11.7%;
+}
 .viewmorearea2{
 	position: absolute;
     display: grid;
@@ -95,6 +114,21 @@ img{
 </style>
 </head>
 <body>
+	<table style="display:none;">
+		<c:forEach var="list2" items="${showword}" varStatus="status">
+			<tr>
+				<td>
+					<c:out value="${list2.word_name}" />
+				</td>
+				<td>
+					<c:out value="${list2.word_trans}" />
+				</td>
+				<td>
+					<c:out value="${list2.word_difficulty}" />
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
 	<c:forEach var="list" items="${showgrammar}" varStatus="status">
 		<c:choose>
 			<c:when test="${list.grammar_content2 == ''}">
@@ -105,6 +139,9 @@ img{
 					</div>
 					<div class="categoryarea1">
 						<input type="text" class="categorybox" value="${list.grammar_category1}" readonly>
+					</div>
+					<div class="wordlistarea1">
+						
 					</div>
 					<div class="viewmorearea1">
 						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext1}" readonly>
@@ -123,6 +160,9 @@ img{
 					<div class="categoryarea1">
 						<input type="text" class="categorybox" value="${list.grammar_category1}" readonly>
 					</div>
+					<div class="wordlistarea1">
+						
+					</div>
 					<div class="viewmorearea1">
 						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext1}" readonly>
 						<div></div>
@@ -135,6 +175,9 @@ img{
 					<div class="categoryarea2">
 						<input type="text" class="categorybox" value="${list.grammar_category2}" readonly>
 					</div>
+					<div class="wordlistarea2">
+						
+					</div>
 					<div class="viewmorearea2">
 						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext3}" readonly>
 						<div></div>
@@ -145,5 +188,8 @@ img{
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
+	<script>
+		
+	</script>
 </body>
 </html>

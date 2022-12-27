@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="imsi">
+	<insert id="imsiinsert" parameterType="com.docedu.web.user.vo.ImsiVO">
+		insert into imsi_table(imsi_title, imsi_content)
+		values(#{imsi_title}, #{imsi_content});
+	</insert>
+	<select id="imsilist" resultType="com.docedu.web.user.vo.ImsiVO">
+		select * from imsi_table;
+	</select>
+	<select id="imsiview" resultType="com.docedu.web.user.vo.ImsiVO">
+		select * from imsi_table Where imsi_seq = #{imsi_seq}
+	</select>
+</mapper>

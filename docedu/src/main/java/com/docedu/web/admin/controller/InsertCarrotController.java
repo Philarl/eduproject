@@ -9,26 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.docedu.web.admin.vo.LectureVO;
+import com.docedu.web.admin.vo.CarrotVO;
 
 @Controller
-public class LectureController {
+public class InsertCarrotController {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	@GetMapping("/mainlecture.mdo")
-	public String mainlectureGet() {
-		return "mainlecture";
-	}
-	
-	@GetMapping("/lectureinsert.mdo")
-	public String lectureinsertGet() {
-		return "lectureinsert";
+	@GetMapping("/sendcarrot.mdo")
+	public String sendcarrotGet() {
+		return "sendcarrot";
 	}
 	@ResponseBody
-    @RequestMapping(value = "/insertlecture.mdo", method = RequestMethod.POST)
-	public String insertlectureGet(@ModelAttribute LectureVO lectureVO) {
-		sqlSessionTemplate.insert("lecture.lectureinsert",lectureVO);
-		return "redirect:/mainlecture.mdo";
+    @RequestMapping(value = "/insertcarrot.mdo", method = RequestMethod.POST)
+	public String insertcarrotGet(@ModelAttribute CarrotVO carrotVO) {
+		sqlSessionTemplate.insert("carrot.carrotinsert",carrotVO);
+		return "redirect:/sendcarrot.mdo";
 	}
+	
 }

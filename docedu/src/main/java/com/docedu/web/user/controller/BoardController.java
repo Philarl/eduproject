@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.docedu.web.admin.vo.GrammarVO;
+import com.docedu.web.admin.vo.TransVO;
 import com.docedu.web.user.service.BoardService;
 import com.docedu.web.user.vo.Criteria;
+import com.docedu.web.user.vo.WordcollectionVO;
 
 @Controller
 public class BoardController {
@@ -37,11 +39,33 @@ public class BoardController {
 	}
 	
 	@GetMapping("/grammarsel.do")
-	public ModelAndView grammarselGet(@RequestParam String grammar_title) {
+	public ModelAndView grammarselGet(@RequestParam String grammar_title, Model model) {
 		ModelAndView mav = new ModelAndView();
+		Criteria Criteria = null;
 		List<Object> grammarVO;
+		List<WordcollectionVO> showList = new ArrayList<WordcollectionVO>();
 		grammarVO = boardService.grammarread(grammar_title);
+		showList = boardService.wordcollection(Criteria);
 		mav.addObject("showgrammar", grammarVO);
+		mav.addObject("showword", showList);
+		return mav;
+	}
+	@RequestMapping(value = "/translist.do")
+	public ModelAndView translistGet(Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Criteria Criteria = null;
+		List<TransVO> showList = new ArrayList<TransVO>();
+		showList = boardService.showtrans_page(Criteria);
+		mav.addObject("TransList", showList);
+		return mav;
+	}
+	
+	@GetMapping("/transview.do")
+	public ModelAndView transviewGet(@RequestParam String trans_title) {
+		ModelAndView mav = new ModelAndView();
+		List<Object> transVO;
+		transVO = boardService.transread(trans_title);
+		mav.addObject("showtrans", transVO);
 		return mav;
 	}
 }
