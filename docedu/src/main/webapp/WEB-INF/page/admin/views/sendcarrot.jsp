@@ -89,99 +89,101 @@
 		}
 		.memorization{
 		    position: absolute;
-		    top: 53.5%;
-		    left: 29%;
-		    width: 18.8%;
+		    top: 54.1%;
+		    left: 32%;
+		    width: 17.5%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size:2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
-		.speechcheck{
+		.reportcheck{
 		    position: absolute;
-		    top: 53.5%;
-		    left: 67.8%;
-		    width: 18.8%;
+		    top: 54.1%;
+		    left: 69.8%;
+		    width: 17%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size:2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
 		.readcheck{
 		    position: absolute;
-		    top: 59.5%;
-		    left: 29%;
-		    width: 18.8%;
+		    top: 59.9%;
+		    left: 32%;
+		    width: 17.5%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size:2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
 		.transcheck{
 		    position: absolute;
-		    top: 59.5%;
-		    left: 67.8%;
-		    width: 18.8%;
+		    top: 59.9%;
+		    left: 69.8%;
+		    width: 17%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size:2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
 		.solvingcheck{
 		    position: absolute;
-		    top: 65.5%;
-		    left: 29%;
-		    width: 18.8%;
+		    top: 66%;
+		    left: 32%;
+		    width: 17.5%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size:2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
 		.listencheck{
 		    position: absolute;
-		    top: 65.5%;
-		    left: 67.8%;
-		    width: 18.8%;
+		    top: 65.7%;
+		    left: 69.8%;
+		    width: 17%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size: 2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
 		.gettingcheck{
 		    position: absolute;
 		    top: 71.4%;
-		    left: 29%;
-		    width: 18.8%;
-		    height: 3vw;
+		    left: 32%;
+		    width: 17.4%;
+		    height: 4vw;
 		    text-align:center;
 		}
 		.gettingbox{
 			width:100%;
+    		height: 50%;
 		}
 		.showdowncheck{
 		    position: absolute;
-		    top: 71.4%;
-		    left: 67.8%;
-		    width: 18.8%;
+		    top: 71.7%;
+		    left: 69.8%;
+		    width: 17%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size: 2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
-		.reportcheck{
+		.speechcheck{
 		    position: absolute;
-		    top: 77.3%;
-		    left: 29%;
-		    width: 18.8%;
+		    top: 78.5%;
+		    left: 32%;
+		    width: 17.5%;
 		    height: 3vw;
-		    text-align:center;
-		    font-size:2.2378vw;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
 		.perfectioncheck{
 		    position: absolute;
-		    top: 77.3%;
-		    left: 67.8%;
-		    width: 18.8%;
+		    top: 78.4%;
+		    left: 69.8%;
+		    width: 17%;
 		    height: 3vw;
-		    text-align:center;
+		    text-align: center;
+		    font-size: 1.9vw;
 		}
 		.perfectionbox{
 			width:100%;
 			height:100%;
-			font-size:2.2378vw;
+			font-size:1.9vw;
     		text-align: center;
 		}
 		.resultarea{
@@ -551,7 +553,7 @@
 	                                    <input type="submit" class="shadow-sm bg-body rounded" id="" value="등록">
 	                                </div>
 	                                <div class="card-body">
-										<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot1.png">
+										<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot2.png">
 	                                    <div class="dayarea"><input type="text" class="daybox" id="datepicker"  name="carrot_date" readonly></div>
 	                                    <div class="classarea"><input type="text" class="classbox" id="classbox" name="carrot_class"></div>
 	                                    <div class="namearea"><input type="text" class="namebox" id="namebox" name="carrot_name"></div>
@@ -561,10 +563,10 @@
 	                                    	<input type="radio" name="carrot_memorization" value="non-pass"> N /
 	                                    	<input type="radio" name="carrot_memorization" value="holding"> H
 	                                    </div>
-	                                    <div class="speechcheck">
-	                                    	<input type="radio" name="carrot_speech" value="pass"> P / 
-	                                    	<input type="radio" name="carrot_speech" value="non-pass"> N /
-	                                    	<input type="radio" name="carrot_speech" value="holding"> H
+	                                    <div class="reportcheck">
+	                                    	<input type="radio" name="carrot_report" value="pass"> P / 
+	                                    	<input type="radio" name="carrot_report" value="non-pass"> N /
+	                                    	<input type="radio" name="carrot_report" value="holding"> H
 	                                    </div>
 	                                    <div class="readcheck">
 	                                    	<input type="radio" name="carrot_read" value="pass"> P / 
@@ -609,10 +611,10 @@
 	                                    	</select>
 	                                    </div>
 	                                    <div class="showdowncheck"><input type="text" class="pagebox" name="carrot_showdown">P</div>
-	                                    <div class="reportcheck">
-	                                    	<input type="radio" name="carrot_report" value="pass"> P / 
-	                                    	<input type="radio" name="carrot_report" value="non-pass"> N /
-	                                    	<input type="radio" name="carrot_report" value="holding"> H
+	                                    <div class="speechcheck">
+	                                    	<input type="radio" name="carrot_speech" value="pass"> P / 
+	                                    	<input type="radio" name="carrot_speech" value="non-pass"> N /
+	                                    	<input type="radio" name="carrot_speech" value="holding"> H
 	                                    </div>
 	                                    <div class="perfectioncheck">
 	                                    	<select class="perfectionbox" name="carrot_perfection">

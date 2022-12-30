@@ -58,65 +58,70 @@ img{
 .memorization{
     position: absolute;
     top: 52.7%;
-    left: 29%;
-    width: 18.8%;
+    left: 32%;
+    width: 17.5%;
     height: 6vw;
     text-align: center;
-    font-size: 3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
-.speechcheck{
+.reportcheck{
     position: absolute;
     top: 52.7%;
-    left: 67.8%;
-    width: 18.8%;
+    left: 69.65%;
+    width: 17.15%;
     height: 6vw;
-    text-align:center;
-    font-size:3.5vw;
+    text-align: center;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
 .readcheck{
     position: absolute;
     top: 58.8%;
-    left: 29%;
-    width: 18.8%;
+    left: 32%;
+    width: 17.5%;
     height: 6vw;
     text-align:center;
-    font-size:3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
 .transcheck{
     position: absolute;
     top: 58.8%;
-    left: 67.8%;
-    width: 18.8%;
+    left: 69.65%;
+    width: 17.15%;
     height: 6vw;
     text-align:center;
-    font-size:3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
 .solvingcheck{
     position: absolute;
     top: 64.6%;
-    left: 29%;
-    width: 18.8%;
+    left: 32%;
+    width: 17.5%;
     height: 6vw;
     text-align:center;
-    font-size:3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
 .listencheck{
     position: absolute;
     top: 65%;
-    left: 67.8%;
-    width: 18.8%;
+    left: 69.65%;
+    width: 17.15%;
     height: 6vw;
     text-align:center;
-    font-size:3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
 .gettingcheck{
     position: absolute;
-    top: 70.4%;
-    left: 29%;
-    width: 18.8%;
+    top: 70.8%;
+    left: 32%;
+    width: 17.5%;
     height: 6.1vw;
-    text-align:center;
-    font-size:1.5vw;
+    display:table;
 }
 .gettingbox{
 	width: 100%;
@@ -127,33 +132,39 @@ img{
     padding: 0;
     font-size:1.75vw;
     text-align:center;
+    display:table-cell;
+    vertical-align:middle;
+    word-break: break-all;
 }
 .showdowncheck{
     position: absolute;
     top: 70.9%;
-    left: 67.8%;
-    width: 18.8%;
+    left: 69.65%;
+    width: 17.15%;
     height: 6vw;
     text-align:center;
-    font-size:3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
-.reportcheck{
+.speechcheck{
     position: absolute;
-    top: 76.4%;
-    left: 29%;
-    width: 18.8%;
+    top: 77%;
+    left: 32%;
+    width: 17.5%;
     height: 6vw;
     text-align:center;
-    font-size:3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
 .perfectioncheck{
     position: absolute;
-    top: 76.7%;
-    left: 67.8%;
-    width: 18.8%;
+    top: 77.3%;
+    left: 69.65%;
+    width: 17.15%;
     height: 6vw;
     text-align:center;
-    font-size:3.5vw;
+    font-size: 2.5vw;
+    line-height: 6vw;
 }
 .resultarea{
     position: absolute;
@@ -173,22 +184,22 @@ img{
 </style>
 <body>
 	<div class="card-body">
-		<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot1.png">
+		<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot2.png">
         <div class="dayarea">${carrot_view.carrot_date}</div>
         <div class="classarea">${carrot_view.carrot_class}</div>
         <div class="namearea">${carrot_view.carrot_name}</div>
         <div class="booksarea">${carrot_view.carrot_books}</div>
         <div class="memorization">${carrot_view.carrot_memorization}</div>
-        <div class="speechcheck">${carrot_view.carrot_speech}</div>
+        <div class="reportcheck">${carrot_view.carrot_report}</div>
         <div class="readcheck">${carrot_view.carrot_read}</div>
         <div class="transcheck">${carrot_view.carrot_trans}</div>
         <div class="solvingcheck">${carrot_view.carrot_solving}</div>
         <div class="listencheck">${carrot_view.carrot_listen}P</div>
-       	<div class="gettingcheck"><textarea class="gettingbox">${carrot_view.carrot_getting}</textarea></div>
+       	<div class="gettingcheck"><p class="gettingbox">${carrot_view.carrot_getting}</p></div>
         <div class="showdowncheck">${carrot_view.carrot_showdown}P</div>
-        <div class="reportcheck">${carrot_view.carrot_report}</div>
+        <div class="speechcheck">${carrot_view.carrot_speech}</div>
         <div class="perfectioncheck">${carrot_view.carrot_perfection}</div>
-        <div class="resultarea"><textarea class="resultbox">${carrot_view.carrot_result}</textarea></div>
+        <div class="resultarea"><textarea class="resultbox" readonly>${carrot_view.carrot_result}</textarea></div>
     </div>
 </body>
 </html>
