@@ -553,7 +553,7 @@
 	                                    <input type="submit" class="shadow-sm bg-body rounded" id="" value="등록">
 	                                </div>
 	                                <div class="card-body">
-										<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot2.png">
+										<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot3.png">
 	                                    <div class="dayarea"><input type="text" class="daybox" id="datepicker"  name="carrot_date" readonly></div>
 	                                    <div class="classarea"><input type="text" class="classbox" id="classbox" name="carrot_class"></div>
 	                                    <div class="namearea"><input type="text" class="namebox" id="namebox" name="carrot_name"></div>

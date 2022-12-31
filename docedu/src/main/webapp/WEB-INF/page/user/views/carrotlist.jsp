@@ -13,9 +13,12 @@
 			<th>CARROT library</th>
 		</tr>
 		<c:forEach var="list" items="${CarrotList}" varStatus="status">
-			<tr>
-				<td onclick="location.href='carrotview.do?carrot_seq=${list.carrot_seq}'">
+			<tr onclick="location.href='carrotview.do?carrot_seq=${list.carrot_seq}'">
+				<td>
 					<c:out value="${list.carrot_name}" />
+				</td>
+				<td>
+					<c:out value="${list.carrot_date}" />
 				</td>
 			</tr>
 		</c:forEach>

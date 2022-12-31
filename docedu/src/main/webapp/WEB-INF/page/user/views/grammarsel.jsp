@@ -195,129 +195,129 @@ img{
 		</c:forEach>
 	</table>
 	<c:forEach var="list" items="${showgrammar}" varStatus="status">
-		<c:choose>
-			<c:when test="${list.grammar_content2 == ''}">
-				<div class="bodyarea">
-					<img class="mainheaderimg2" alt="img2" src="/resources/img/user/grammar2.png">
-					<div class="contentarea1">
-						<textarea class="contentbox1" readonly>  ${list.grammar_content1}</textarea>
+		<c:if test="${list.grammar_content2 == ''}">
+			<div class="bodyarea">
+				<img class="mainheaderimg2" alt="img2" src="/resources/img/user/grammar2.png">
+				<div class="contentarea1">
+					<textarea class="contentbox1" readonly>  ${list.grammar_content1}</textarea>
+				</div>
+				<div class="categoryarea1">
+					<input type="text" class="categorybox" value="${list.grammar_category1}" readonly>
+				</div>
+				<div class="wordlistarea1">
+					<div class="wordlist1-1">
 					</div>
-					<div class="categoryarea1">
-						<input type="text" class="categorybox" value="${list.grammar_category1}" readonly>
-					</div>
-					<div class="wordlistarea1">
-						<div class="wordlist1-1">
-						</div>
-						<div class="translist1-1">
-							<div id="google_sectional_element" style="display:none"></div>
-							<div class="goog-trans-section" style="height:100% !important;">
-							    <div class="goog-trans" style="display:none">
-							        <div class="goog-trans-control"></div>
-							    </div>
-							    <div id="google_translate_element_area" class="trans1-1"></div>
-							</div>
-						</div>
-						<div></div>
-						<div class="wordlist1-2">
-						</div>
-						<div class="translist1-2">
+					<div class="translist1-1">
 						<div id="google_sectional_element" style="display:none"></div>
-							<div class="goog-trans-section">
-							    <div class="goog-trans" style="display:none">
-							        <div class="goog-trans-control"></div>
-							    </div>
-							    <div id="google_translate_element_area" class="trans1-2"></div>
-							</div>
+						<div class="goog-trans-section" style="height:100% !important;">
+						    <div class="goog-trans" style="display:none">
+						        <div class="goog-trans-control"></div>
+						    </div>
+						    <div id="google_translate_element_area" class="trans1-1"></div>
 						</div>
 					</div>
-					<div class="viewmorearea1">
-						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext1}" readonly>
-						<div></div>
-						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext2}" readonly>
-						<div></div>
+					<div></div>
+					<div class="wordlist1-2">
+					</div>
+					<div class="translist1-2">
+					<div id="google_sectional_element" style="display:none"></div>
+						<div class="goog-trans-section">
+						    <div class="goog-trans" style="display:none">
+						        <div class="goog-trans-control"></div>
+						    </div>
+						    <div id="google_translate_element_area" class="trans1-2"></div>
+						</div>
 					</div>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="bodyarea">
-					<img class="mainheaderimg1" alt="img1" src="/resources/img/user/grammar1.png">
-					<div class="contentarea1">
-						<textarea class="contentbox1" readonly>  ${list.grammar_content1}</textarea>
+				<div class="viewmorearea1">
+					<div class="viewmorebox">${list.grammar_viewmoretext1}</div>
+					<div></div>
+					<div class="viewmorebox">${list.grammar_viewmoretext2}</div>
+					<div></div>
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${list.grammar_content1 == '' and list.grammar_content2 == ''}">
+		</c:if>
+		<c:if test="${list.grammar_content2 != ''}">
+			<div class="bodyarea">
+				<img class="mainheaderimg1" alt="img1" src="/resources/img/user/grammar1.png">
+				<div class="contentarea1">
+					<textarea class="contentbox1" readonly>  ${list.grammar_content1}</textarea>
+				</div>
+				<div class="categoryarea1">
+					<input type="text" class="categorybox" value="${list.grammar_category1}" readonly>
+				</div>
+				<div class="wordlistarea1">
+					<div class="wordlist1-1">
 					</div>
-					<div class="categoryarea1">
-						<input type="text" class="categorybox" value="${list.grammar_category1}" readonly>
-					</div>
-					<div class="wordlistarea1">
-						<div class="wordlist1-1">
-						</div>
-						<div class="translist1-1">
-							<div id="google_sectional_element" style="display:none"></div>
-							<div class="goog-trans-section">
-							    <div class="goog-trans" style="display:none">
-							        <div class="goog-trans-control"></div>
-							    </div>
-							    <div id="google_translate_element_area" class="trans1-1"></div>
-							</div>
-						</div>
-						<div></div>
-						<div class="wordlist1-2">
-						</div>
-						<div class="translist1-2">
-							<div id="google_sectional_element" style="display:none"></div>
-							<div class="goog-trans-section">
-							    <div class="goog-trans" style="display:none">
-							        <div class="goog-trans-control"></div>
-							    </div>
-							    <div id="google_translate_element_area" class="trans1-2"></div>
-							</div>
+					<div class="translist1-1">
+						<div id="google_sectional_element" style="display:none"></div>
+						<div class="goog-trans-section">
+						    <div class="goog-trans" style="display:none">
+						        <div class="goog-trans-control"></div>
+						    </div>
+						    <div id="google_translate_element_area" class="trans1-1"></div>
 						</div>
 					</div>
-					<div class="viewmorearea1">
-						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext1}" readonly>
-						<div></div>
-						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext2}" readonly>
-						<div></div>
+					<div></div>
+					<div class="wordlist1-2">
 					</div>
-					<div class="contentarea2">
-						<textarea class="contentbox2" readonly>  ${list.grammar_content2}</textarea>
-					</div>
-					<div class="categoryarea2">
-						<input type="text" class="categorybox" value="${list.grammar_category2}" readonly>
-					</div>
-					<div class="wordlistarea2">
-						<div class="wordlist2-1">
+					<div class="translist1-2">
+						<div id="google_sectional_element" style="display:none"></div>
+						<div class="goog-trans-section">
+						    <div class="goog-trans" style="display:none">
+						        <div class="goog-trans-control"></div>
+						    </div>
+						    <div id="google_translate_element_area" class="trans1-2"></div>
 						</div>
-						<div class="translist2-1">
-							<div id="google_sectional_element" style="display:none"></div>
-							<div class="goog-trans-section">
-							    <div class="goog-trans" style="display:none">
-							        <div class="goog-trans-control"></div>
-							    </div>
-							    <div id="google_translate_element_area" class="trans2-1"></div>
-							</div>
-						</div>
-						<div></div>
-						<div class="wordlist2-2">
-						</div>
-						<div class="translist2-2">
-							<div id="google_sectional_element" style="display:none"></div>
-							<div class="goog-trans-section">
-							    <div class="goog-trans" style="display:none">
-							        <div class="goog-trans-control"></div>
-							    </div>
-							    <div id="google_translate_element_area" class="trans2-2"></div>
-							</div>
-						</div>
-					</div>
-					<div class="viewmorearea2">
-						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext3}" readonly>
-						<div></div>
-						<input type="text" class="viewmorebox" value="${list.grammar_viewmoretext4}" readonly>
-						<div></div>
 					</div>
 				</div>
-			</c:otherwise>
-		</c:choose>
+				<div class="viewmorearea1">
+					<div class="viewmorebox">${list.grammar_viewmoretext1}</div>
+					<div></div>
+					<div class="viewmorebox">${list.grammar_viewmoretext2}</div>
+					<div></div>
+				</div>
+				<div class="contentarea2">
+					<textarea class="contentbox2" readonly>  ${list.grammar_content2}</textarea>
+				</div>
+				<div class="categoryarea2">
+					<input type="text" class="categorybox" value="${list.grammar_category2}" readonly>
+				</div>
+				<div class="wordlistarea2">
+					<div class="wordlist2-1">
+					</div>
+					<div class="translist2-1">
+						<div id="google_sectional_element" style="display:none"></div>
+						<div class="goog-trans-section">
+						    <div class="goog-trans" style="display:none">
+						        <div class="goog-trans-control"></div>
+						    </div>
+						    <div id="google_translate_element_area" class="trans2-1"></div>
+						</div>
+					</div>
+					<div></div>
+					<div class="wordlist2-2">
+					</div>
+					<div class="translist2-2">
+						<div id="google_sectional_element" style="display:none"></div>
+						<div class="goog-trans-section">
+						    <div class="goog-trans" style="display:none">
+						        <div class="goog-trans-control"></div>
+						    </div>
+						    <div id="google_translate_element_area" class="trans2-2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="viewmorearea2">
+					<div class="viewmorebox">${list.grammar_viewmoretext3}</div>
+					<div></div>
+					<div class="viewmorebox">${list.grammar_viewmoretext4}</div>
+					<div></div>
+				</div>
+			</div>
+		</c:if>
 	</c:forEach>
 	<script src="//translate.google.com/translate_a/element.js?cb=googleSectionalElementInit&ug=section&hl=ko"></script>
 	<script>

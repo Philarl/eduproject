@@ -139,6 +139,7 @@ img{
 		</div>
 		<div class="plusbtnarea">
 			<button class="plusbtn" id="plusbtn">본문 추가</button>
+			<button class="plusbtn" id="deletebtn">본문 제거</button>
 		</div>
 		<div class="optionarea1">
 			<select class="categorysel" id="categorysel1_1">
@@ -493,6 +494,11 @@ img{
 				test += '</div>';
 				test += '</div>';
                 $("body").append(test);
+			});
+			$(document).on("click","#deletebtn", function(){
+				$(".bodyarea")[$(".bodyarea").length-1].remove();
+				a -= 2;
+				b -= 2;
 			});
 		})
 		Array.prototype.division = function (n) {

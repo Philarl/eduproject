@@ -172,6 +172,7 @@ img{
     left: 20%;
     width: 66.7%;
     height: 12.6vw;
+    display:table;
 }
 .resultbox{
     width: 100%;
@@ -180,11 +181,14 @@ img{
     font-size: 2.6783vw;
     border:0;
     background-color: rgba( 255, 255, 255, 0);
+    display:table-cell;
+    vertical-align:middle;
+    word-break: break-all;
 }
 </style>
 <body>
 	<div class="card-body">
-		<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot2.png">
+		<img class="mainheaderimg1" alt="img1" src="/resources/img/admin/carrot3.png">
         <div class="dayarea">${carrot_view.carrot_date}</div>
         <div class="classarea">${carrot_view.carrot_class}</div>
         <div class="namearea">${carrot_view.carrot_name}</div>
@@ -199,7 +203,7 @@ img{
         <div class="showdowncheck">${carrot_view.carrot_showdown}P</div>
         <div class="speechcheck">${carrot_view.carrot_speech}</div>
         <div class="perfectioncheck">${carrot_view.carrot_perfection}</div>
-        <div class="resultarea"><textarea class="resultbox" readonly>${carrot_view.carrot_result}</textarea></div>
+        <div class="resultarea"><p class="resultbox">${carrot_view.carrot_result}</p></div>
     </div>
 </body>
 </html>

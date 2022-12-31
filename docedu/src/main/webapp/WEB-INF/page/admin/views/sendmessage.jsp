@@ -725,21 +725,18 @@
             $('input:radio[name="understand"]').click( function (){
                 if ($('input:radio[name="understand"]').is( ":checked")){
                     var understandlistVar = $('input:radio[name="understand"]:checked').val();
-                    alert(understandlistVar);
                     document.getElementById('understandspan').innerText = understandlistVar;
                 }
             })
             $('input:radio[name="notes"]').click( function (){
                 if ($('input:radio[name="notes"]').is( ":checked")){
                     var noteslistVar = $('input:radio[name="notes"]:checked').val();
-                    alert(noteslistVar);
                     document.getElementById('notesspan').innerText = noteslistVar;
                 }
             })
             $('input:radio[name="works"]').click( function (){
                 if ($('input:radio[name="works"]').is( ":checked")){
                     var workslistVar = $('input:radio[name="works"]:checked').val();
-                    alert(workslistVar);
                     document.getElementById('worksspan').innerText = workslistVar;
                 }
             })
@@ -748,19 +745,19 @@
             const value = target.value;
             const text =  target.options[target.selectedIndex].text;
             
-            document.getElementById('namep').innerHTML = `${text}`;
+            document.getElementById('namep').innerHTML = `\${text}`;
         }
         const homeworkresultValue = (target) => {
             const value = target.value;
             const text =  target.options[target.selectedIndex].text;
             
-            document.getElementById('homeworkresultp').innerHTML = `▶ 과제 이행도 : ${text}`;
+            document.getElementById('homeworkresultp').innerHTML = `▶ 과제 이행도 : \${text}`;
         }
         const testresultValue = (target) => {
             const value = target.value;
             const text =  target.options[target.selectedIndex].text;
   
-            document.getElementById('testresultp').innerHTML = `▶ 테스트 결과 : ${text}`;
+            document.getElementById('testresultp').innerHTML = `▶ 테스트 결과 : \${text}`;
         }
         $("#datepicker").datepicker({
             language: 'ko',
