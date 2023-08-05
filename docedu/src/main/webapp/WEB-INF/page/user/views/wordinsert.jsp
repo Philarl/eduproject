@@ -41,14 +41,19 @@
 			const header="wpdf_header";
 			const name="wpdf_name";
 			const trans="wpdf_trans";
+			const wclass="wpdf_class";
 			var words = obj.parentNode.children[1].value;
+			console.log(words);
 			var splitwords = words.split(/\t|\n/);
-			for(i=0;i<splitwords.length;i+=3){
+			console.log(splitwords);
+			
+			for(i=0;i<splitwords.length;i+=4){
 				splitwords.splice(i,0,gugudan)
 			}
-			var result = splitwords.division(3);
+			var result = splitwords.division(4);
+			console.log(result);
 			for(var j=0;j<result.length;j++){
-				result[j] = {[header]:result[j][0],[name]:result[j][1],[trans]:result[j][2]};
+				result[j] = {[header]:result[j][0],[name]:result[j][1],[wclass]:result[j][2],[trans]:result[j][3]};
 			}
 			var jsonwords = JSON.stringify(result);
 			console.log(jsonwords);
@@ -60,6 +65,7 @@
 		        contentType: 'application/json',
 		        success: function(data) {
 		        	alert("success!");
+		        	location.href = "/wordpdflist.do";
 		        }
 		    });
 		};

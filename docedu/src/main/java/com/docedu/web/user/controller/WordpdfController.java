@@ -22,7 +22,11 @@ import com.docedu.web.user.service.WordpdfService;
 import com.docedu.web.user.vo.Criteria;
 import com.docedu.web.user.vo.WordpdfVO;
 
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log
 public class WordpdfController {
 	
 	@Autowired
@@ -49,8 +53,25 @@ public class WordpdfController {
 		mav.addObject("WordpdfList", showList);
 		return mav;
 	}
+	@GetMapping("wordpdflist30.do")
+	public ModelAndView wordpdflist30Get(Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Criteria Criteria = null;
+		List<WordpdfVO> showList = new ArrayList<WordpdfVO>();
+		showList = wordpdfService.wordpdflist_page(Criteria);
+		mav.addObject("WordpdfList", showList);
+		return mav;
+	}
 	@GetMapping("/wordpdf.do")
 	public ModelAndView wordpdfGet(@RequestParam String wpdf_header) {
+		ModelAndView mav = new ModelAndView();
+		List<Object> wordpdfVO;
+		wordpdfVO = wordpdfService.wordpdfread(wpdf_header);
+		mav.addObject("wpdf_view", wordpdfVO);
+		return mav;
+	}
+	@GetMapping("/wordpdf30.do")
+	public ModelAndView wordpdf30Get(@RequestParam String wpdf_header) {
 		ModelAndView mav = new ModelAndView();
 		List<Object> wordpdfVO;
 		wordpdfVO = wordpdfService.wordpdfread(wpdf_header);
@@ -70,5 +91,10 @@ public class WordpdfController {
 	public List<Map<String, Object>> test(@RequestBody List<Map<String, Object>> param) {
 		sqlSessionTemplate.insert("wordpdf.wordpdfinsert",param);
 		return param;
+	}
+	@GetMapping("/wordpdfdelete.do")
+	public String wordpdfDelete(@RequestParam String wpdf_header) {
+		wordpdfService.wordpdfdelete(wpdf_header);
+		return "redirect:/wordpdflist.do";
 	}
 }

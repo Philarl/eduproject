@@ -4,10 +4,11 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wordpdf">
 	<insert id="wordpdfinsert" parameterType="com.docedu.web.user.vo.WordpdfVO">
-		insert into wordpdf(wpdf_header, wpdf_name, wpdf_trans)
+		insert into
+			wordpdf(wpdf_header, wpdf_name, wpdf_class, wpdf_trans)
 		values
 		<foreach collection="list" item="item" separator=" , ">
-			(#{item.wpdf_header},#{item.wpdf_name},#{item.wpdf_trans})
+			(#{item.wpdf_header}, #{item.wpdf_name}, #{item.wpdf_class}, #{item.wpdf_trans})
 		</foreach>
 	</insert>
 	<select id="wordpdfview" resultType="com.docedu.web.user.vo.WordpdfVO">
@@ -16,4 +17,10 @@
 	<select id="wordpdfviewList" resultType="com.docedu.web.user.vo.WordpdfVO">
 		select distinct wpdf_header from wordpdf;
 	</select>
+	<delete id="wordpdfdelete">
+		delete from
+			wordpdf
+		where
+			wpdf_header = #{wpdf_header};
+	</delete>
 </mapper>

@@ -21,4 +21,8 @@ public class WordpdfDAO {
 	public List<Object> wordpdfread(String wpdf_header) {
 		return sqlSessionTemplate.selectList("wordpdf.wordpdfview", wpdf_header);
 	}
+	
+	public int wordpdfdelete(String wpdf_header) {
+		return sqlSessionTemplate.delete("wordpdf.wordpdfdelete", wpdf_header);
+	}
 }

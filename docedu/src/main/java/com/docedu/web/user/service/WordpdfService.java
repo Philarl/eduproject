@@ -8,4 +8,5 @@ import com.docedu.web.user.vo.WordpdfVO;
 public interface WordpdfService {
 	public List<WordpdfVO> wordpdflist_page(Criteria cr);
 	public List<Object> wordpdfread(String wpdf_header);
+	public int wordpdfdelete(String wpdf_header);
 }

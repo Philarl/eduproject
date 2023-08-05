@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joripcom.mapper.AdOrderMapper">
+	
+	<sql id="sDate">
+		<if test="sDate != null and !sDate.equals('')">
+		<![CDATA[
+			order_date >= to_date(#{sDate})
+			and
+			]]>
+		</if>
+	</sql>
+	
+	<sql id="eDate">
+		<if test="eDate != null and !eDate.equals('')">
+		<![CDATA[
+			order_date < to_date(#{eDate}) + 1
+			and
+			]]>
+		</if>
+	</sql>
+	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach collection="cri.typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'O'.toString()">ord_no like '%' || #{cri.keyword} || '%'</when>
+						<when test="type == 'I'.toString()">u_id like '%' || #{cri.keyword} || '%'</when>
+						<when test="type == 'N'.toString()">ord_name like '%' || #{cri.keyword} || '%'</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<select id="orderList" resultType="com.joripcom.domain.OrderVO">
+		SELECT
+			RN, ord_no, u_id, ord_name, ord_zipcode, ord_addr, ord_addr_dtl, ord_phone, ord_email, ord_sum, order_date, pay_method
+		FROM (
+				SELECT /*+INDEX_DESC(ord_tbl pk_ord_no) */
+						ROWNUM RN, ord_no, u_id, ord_name, ord_zipcode, ord_addr, ord_addr_dtl, ord_phone, ord_email, ord_sum, order_date, pay_method
+				FROM
+					ord_tbl
+				WHERE
+					<include refid="sDate" />
+					<include refid="eDate" />
+					<include refid="criteria" />
+		<![CDATA[		
+					ROWNUM <= #{cri.pageNum} * #{cri.amount}
+			)
+		WHERE RN > (#{cri.pageNum}-1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			ord_tbl
+		WHERE
+			<include refid="sDate" />
+			<include refid="eDate" />
+			<include refid="criteria" />
+			ord_no > 0
+	</select>
+	
+	<select id="orderDetail" resultType="com.joripcom.domain.AdOrderDetailVO">
+		SELECT
+			od.ord_no, od.p_no, od.od_amt, od.od_px, p.p_name, p.p_up_folder, p.p_img
+		FROM
+			od_tbl od
+				INNER JOIN
+					p_tbl p 
+		ON
+			od.p_no = p.p_no
+		WHERE
+			od.ord_no = #{ord_no}
+	</select>
+	
+	<delete id="orderDetailProductDelete">
+		DELETE FROM
+			od_tbl
+		WHERE
+			ord_no = #{ord_no}
+		AND
+			p_no = #{p_no}
+	</delete>
+	
+	<select id="getPayment" resultType="com.joripcom.domain.PaymentVO">
+		SELECT
+			pay_no, ord_no, u_id, pay_method, pay_px, pay_user, pay_bank, pay_memo
+		FROM
+			pay_tbl
+		WHERE
+			ord_no = #{ord_no}
+	</select>
+	
+	<select id="getOrder" resultType="com.joripcom.domain.OrderVO">
+		SELECT
+			ord_no, u_id, ord_name, ord_zipcode, ord_addr, ord_addr_dtl, ord_phone, ord_email, ord_sum, order_date, pay_method
+		FROM
+			ord_tbl
+		WHERE
+			ord_no = #{ord_no}
+	</select>
+	
+	<update id="modifyPaymentODPD">
+		UPDATE
+			pay_tbl
+		SET
+			pay_px = #{p_vo.pay_px} - (#{od_amt} * #{od_px})
+		WHERE
+			ord_no = #{ord_no}
+	</update>
+	
+	<update id="modifyOrderODPD">
+		UPDATE
+			ord_tbl
+		SET
+			ord_sum = #{o_vo.ord_sum} - (#{od_amt} * #{od_px})
+		WHERE
+			ord_no = #{ord_no}
+	</update>
+	
+	<delete id="orderDeletePayment">
+		DELETE FROM
+			pay_tbl
+		WHERE
+			ord_no = #{ord_no}
+	</delete>
+	
+	<delete id="orderDeleteDetail">
+		DELETE FROM
+			od_tbl
+		WHERE
+			ord_no = #{ord_no}
+	</delete>
+	
+	<delete id="orderInfoDelete">
+		DELETE FROM
+			ord_tbl
+		WHERE
+			ord_no = #{ord_no}
+	</delete>
+</mapper>

@@ -23,4 +23,10 @@ public class WordpdfServiceImpl implements WordpdfService{
 	public List<Object> wordpdfread(String wpdf_header) {
 		return wordpdfDAO.wordpdfread(wpdf_header);
 	}
+
+	@Override
+	public int wordpdfdelete(String wpdf_header) {
+		
+		return wordpdfDAO.wordpdfdelete(wpdf_header);
+	}
 }

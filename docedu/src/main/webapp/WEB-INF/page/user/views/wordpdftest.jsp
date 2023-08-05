@@ -137,6 +137,7 @@
 			<tr>
 				<td>제목</td>
 				<td>단어</td>
+                <td>품사</td>
 				<td>해석</td>
 			</tr>
 		</thead>
@@ -144,6 +145,7 @@
 			<tr>
 				<td><c:out value="${list.wpdf_header}" /></td>
 				<td><c:out value="${list.wpdf_name}" /></td>
+                <td>품사</td>
 				<td><c:out value="${list.wpdf_trans}" /></td>
 			</tr>
 		</c:forEach>
