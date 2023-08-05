@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joripcom.mapper.TeacherReportMapper">
+
+	<select id="teacher_list" resultType="com.joripcom.domain.TeacherReportVO">
+		SELECT
+		    teacher, min(r_update)
+		FROM
+		    teacherReport
+		GROUP BY
+		    teacher
+		ORDER BY
+			min(r_update)
+	</select>
+	
+	<select id="class_list" resultType="com.joripcom.domain.TeacherReportVO">
+		SELECT
+			c_name, r_update
+		FROM
+			teacherReport
+		WHERE
+			teacher = #{teacher}
+	</select>
+
+	<insert id="saveReport" parameterType="com.joripcom.domain.TeacherReportVO">
+		MERGE INTO
+			teacherReport
+		USING
+			DUAL
+		ON
+			(teacher = #{teacher} and c_name = #{c_name})
+		WHEN MATCHED THEN
+			UPDATE
+				SET
+					book_name = #{book_name},
+					c_student = #{c_student},
+					p_no_1 = #{p_no_1},p_date_1 = #{p_date_1},p_day_1 = #{p_day_1},p_progress_1 = #{p_progress_1},p_assignment_1 = #{p_assignment_1},p_check_1 = #{p_check_1},
+					p_no_2 = #{p_no_2},p_date_2 = #{p_date_2},p_day_2 = #{p_day_2},p_progress_2 = #{p_progress_2},p_assignment_2 = #{p_assignment_2},p_check_2 = #{p_check_2},
+					p_no_3 = #{p_no_3},p_date_3 = #{p_date_3},p_day_3 = #{p_day_3},p_progress_3 = #{p_progress_3},p_assignment_3 = #{p_assignment_3},p_check_3 = #{p_check_3},
+					p_no_4 = #{p_no_4},p_date_4 = #{p_date_4},p_day_4 = #{p_day_4},p_progress_4 = #{p_progress_4},p_assignment_4 = #{p_assignment_4},p_check_4 = #{p_check_4},
+					p_no_5 = #{p_no_5},p_date_5 = #{p_date_5},p_day_5 = #{p_day_5},p_progress_5 = #{p_progress_5},p_assignment_5 = #{p_assignment_5},p_check_5 = #{p_check_5},
+					p_no_6 = #{p_no_6},p_date_6 = #{p_date_6},p_day_6 = #{p_day_6},p_progress_6 = #{p_progress_6},p_assignment_6 = #{p_assignment_6},p_check_6 = #{p_check_6},
+					p_no_7 = #{p_no_7},p_date_7 = #{p_date_7},p_day_7 = #{p_day_7},p_progress_7 = #{p_progress_7},p_assignment_7 = #{p_assignment_7},p_check_7 = #{p_check_7},
+					p_no_8 = #{p_no_8},p_date_8 = #{p_date_8},p_day_8 = #{p_day_8},p_progress_8 = #{p_progress_8},p_assignment_8 = #{p_assignment_8},p_check_8 = #{p_check_8},
+					p_no_9 = #{p_no_9},p_date_9 = #{p_date_9},p_day_9 = #{p_day_9},p_progress_9 = #{p_progress_9},p_assignment_9 = #{p_assignment_9},p_check_9 = #{p_check_9},
+					p_no_10 = #{p_no_10},p_date_10 = #{p_date_10},p_day_10 = #{p_day_10},p_progress_10 = #{p_progress_10},p_assignment_10 = #{p_assignment_10},p_check_10 = #{p_check_10},
+					p_no_11 = #{p_no_11},p_date_11 = #{p_date_11},p_day_11 = #{p_day_11},p_progress_11 = #{p_progress_11},p_assignment_11 = #{p_assignment_11},p_check_11 = #{p_check_11},
+					p_no_12 = #{p_no_12},p_date_12 = #{p_date_12},p_day_12 = #{p_day_12},p_progress_12 = #{p_progress_12},p_assignment_12 = #{p_assignment_12},p_check_12 = #{p_check_12},
+					r_update = sysdate
+		WHEN NOT MATCHED THEN
+			INSERT
+				(teacher, book_name, c_name, c_student, p_no_1, p_date_1, p_day_1, p_progress_1, p_assignment_1, p_check_1, p_no_2, p_date_2, p_day_2, p_progress_2, p_assignment_2, p_check_2, p_no_3, p_date_3, p_day_3, p_progress_3, p_assignment_3, p_check_3, p_no_4, p_date_4, p_day_4, p_progress_4, p_assignment_4, p_check_4, p_no_5, p_date_5, p_day_5, p_progress_5, p_assignment_5, p_check_5, p_no_6, p_date_6, p_day_6, p_progress_6, p_assignment_6, p_check_6, p_no_7, p_date_7, p_day_7, p_progress_7, p_assignment_7, p_check_7, p_no_8, p_date_8, p_day_8, p_progress_8, p_assignment_8, p_check_8, p_no_9, p_date_9, p_day_9, p_progress_9, p_assignment_9, p_check_9, p_no_10, p_date_10, p_day_10, p_progress_10, p_assignment_10, p_check_10, p_no_11, p_date_11, p_day_11, p_progress_11, p_assignment_11, p_check_11, p_no_12, p_date_12, p_day_12, p_progress_12, p_assignment_12, p_check_12)
+			VALUES
+				(#{teacher}, #{book_name}, #{c_name}, #{c_student}, #{p_no_1}, #{p_date_1}, #{p_day_1}, #{p_progress_1}, #{p_assignment_1}, #{p_check_1}, #{p_no_2}, #{p_date_2}, #{p_day_2}, #{p_progress_2}, #{p_assignment_2}, #{p_check_2}, #{p_no_3}, #{p_date_3}, #{p_day_3}, #{p_progress_3}, #{p_assignment_3}, #{p_check_3}, #{p_no_4}, #{p_date_4}, #{p_day_4}, #{p_progress_4}, #{p_assignment_4}, #{p_check_4}, #{p_no_5}, #{p_date_5}, #{p_day_5}, #{p_progress_5}, #{p_assignment_5}, #{p_check_5}, #{p_no_6}, #{p_date_6}, #{p_day_6}, #{p_progress_6}, #{p_assignment_6}, #{p_check_6}, #{p_no_7}, #{p_date_7}, #{p_day_7}, #{p_progress_7}, #{p_assignment_7}, #{p_check_7}, #{p_no_8}, #{p_date_8}, #{p_day_8}, #{p_progress_8}, #{p_assignment_8}, #{p_check_8}, #{p_no_9}, #{p_date_9}, #{p_day_9}, #{p_progress_9}, #{p_assignment_9}, #{p_check_9}, #{p_no_10}, #{p_date_10}, #{p_day_10}, #{p_progress_10}, #{p_assignment_10}, #{p_check_10}, #{p_no_11}, #{p_date_11}, #{p_day_11}, #{p_progress_11}, #{p_assignment_11}, #{p_check_11}, #{p_no_12}, #{p_date_12}, #{p_day_12}, #{p_progress_12}, #{p_assignment_12}, #{p_check_12})
+	</insert>
+	
+	<select id="getReport" resultType="com.joripcom.domain.TeacherReportVO">
+		SELECT
+			teacher, book_name, c_name, c_student, p_no_1, p_date_1, p_day_1, p_progress_1, p_assignment_1, p_check_1, p_no_2, p_date_2, p_day_2, p_progress_2, p_assignment_2, p_check_2, p_no_3, p_date_3, p_day_3, p_progress_3, p_assignment_3, p_check_3, p_no_4, p_date_4, p_day_4, p_progress_4, p_assignment_4, p_check_4, p_no_5, p_date_5, p_day_5, p_progress_5, p_assignment_5, p_check_5, p_no_6, p_date_6, p_day_6, p_progress_6, p_assignment_6, p_check_6, p_no_7, p_date_7, p_day_7, p_progress_7, p_assignment_7, p_check_7, p_no_8, p_date_8, p_day_8, p_progress_8, p_assignment_8, p_check_8, p_no_9, p_date_9, p_day_9, p_progress_9, p_assignment_9, p_check_9, p_no_10, p_date_10, p_day_10, p_progress_10, p_assignment_10, p_check_10, p_no_11, p_date_11, p_day_11, p_progress_11, p_assignment_11, p_check_11, p_no_12, p_date_12, p_day_12, p_progress_12, p_assignment_12, p_check_12
+		FROM
+			teacherReport
+		WHERE
+			teacher = #{teacher} AND
+			c_name = #{c_name}
+	</select>
+</mapper>
