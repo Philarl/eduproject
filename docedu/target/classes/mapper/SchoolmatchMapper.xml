@@ -11,22 +11,77 @@
 		schoolmatch_parentphone1, schoolmatch_parentphone2, schoolmatch_parentphone3, schoolmatch_date,
 		schoolmatch_agree, schoolmatch_buram, schoolmatch_sangmyung, schoolmatch_youngsin,
 		schoolmatch_daejingirls, schoolmatch_yonghwa, schoolmatch_cheongwongirls, schoolmatch_cheongwon,
-		schoolmatch_daejin, schoolmatch_jaehyun, schoolmatch_sorabol, schoolmatch_prior1, schoolmatch_prior2,
-		schoolmatch_prior3, schoolmatch_prior4, schoolmatch_prior5, schoolmatch_tendency1, schoolmatch_tendency2,
-		schoolmatch_tendency3, schoolmatch_tendency4, schoolmatch_tendency5, schoolmatch_tendency6)
+		schoolmatch_daejin, schoolmatch_jaehyun, schoolmatch_sorabol, schoolmatch_hyeseonggirls, schoolmatch_prior1, schoolmatch_prior2,
+		schoolmatch_prior3, schoolmatch_prior4, schoolmatch_prior5, schoolmatch_prior, schoolmatch_tendency1, schoolmatch_tendency2,
+		schoolmatch_tendency3, schoolmatch_tendency4, schoolmatch_tendency5, schoolmatch_tendency6,
+		schoolmatch_english1, schoolmatch_english2, schoolmatch_english3, schoolmatch_english4, schoolmatch_english5,
+		schoolmatch_english6, schoolmatch_english7, schoolmatch_english8, schoolmatch_english9, schoolmatch_english10,
+		schoolmatch_math1, schoolmatch_math2, schoolmatch_math3, schoolmatch_math4, schoolmatch_math5,
+		schoolmatch_math6, schoolmatch_math7, schoolmatch_math8, schoolmatch_math9, schoolmatch_math10,
+		schoolmatch_korean1, schoolmatch_korean2, schoolmatch_korean3, schoolmatch_korean4, schoolmatch_korean5,
+		schoolmatch_korean6, schoolmatch_korean7, schoolmatch_korean8, schoolmatch_korean9, schoolmatch_korean10)
 		values(#{schoolmatch_name}, #{schoolmatch_school},
 		#{schoolmatch_grade}, #{schoolmatch_phone1}, #{schoolmatch_phone2}, #{schoolmatch_phone3},
 		#{schoolmatch_parentphone1}, #{schoolmatch_parentphone2}, #{schoolmatch_parentphone3}, #{schoolmatch_date},
 		#{schoolmatch_agree}, #{schoolmatch_buram}, #{schoolmatch_sangmyung}, #{schoolmatch_youngsin},
 		#{schoolmatch_daejingirls}, #{schoolmatch_yonghwa}, #{schoolmatch_cheongwongirls}, #{schoolmatch_cheongwon},
-		#{schoolmatch_daejin}, #{schoolmatch_jaehyun}, #{schoolmatch_sorabol}, #{schoolmatch_prior1}, #{schoolmatch_prior2},
-		#{schoolmatch_prior3}, #{schoolmatch_prior4}, #{schoolmatch_prior5}, #{schoolmatch_tendency1}, #{schoolmatch_tendency2},
-		#{schoolmatch_tendency3}, #{schoolmatch_tendency4}, #{schoolmatch_tendency5}, #{schoolmatch_tendency6});
+		#{schoolmatch_daejin}, #{schoolmatch_jaehyun}, #{schoolmatch_sorabol}, #{schoolmatch_hyeseonggirls}, #{schoolmatch_prior1}, #{schoolmatch_prior2},
+		#{schoolmatch_prior3}, #{schoolmatch_prior4}, #{schoolmatch_prior5}, #{schoolmatch_prior}, #{schoolmatch_tendency1}, #{schoolmatch_tendency2},
+		#{schoolmatch_tendency3}, #{schoolmatch_tendency4}, #{schoolmatch_tendency5}, #{schoolmatch_tendency6},
+		#{schoolmatch_english1}, #{schoolmatch_english2}, #{schoolmatch_english3}, #{schoolmatch_english4}, #{schoolmatch_english5},
+		#{schoolmatch_english6}, #{schoolmatch_english7}, #{schoolmatch_english8}, #{schoolmatch_english9}, #{schoolmatch_english10},
+		#{schoolmatch_math1}, #{schoolmatch_math2}, #{schoolmatch_math3}, #{schoolmatch_math4}, #{schoolmatch_math5},
+		#{schoolmatch_math6}, #{schoolmatch_math7}, #{schoolmatch_math8}, #{schoolmatch_math9}, #{schoolmatch_math10},
+		#{schoolmatch_korean1}, #{schoolmatch_korean2}, #{schoolmatch_korean3}, #{schoolmatch_korean4}, #{schoolmatch_korean5},
+		#{schoolmatch_korean6}, #{schoolmatch_korean7}, #{schoolmatch_korean8}, #{schoolmatch_korean9}, #{schoolmatch_korean10});
 	</insert>
 	<select id="schoolmatchList" resultType="com.docedu.web.user.vo.SchoolmatchVO">
-		select * from schoolmatchtest;
+		select * from schoolmatchtest order by test_date DESC;
 	</select>
 	<select id="schoolmatchresult" resultType="com.docedu.web.user.vo.SchoolmatchVO">
 		select * from schoolmatchtest Where schoolmatch_seq = #{schoolmatch_seq};
+	</select>
+	<delete id="schoolmatchdelete">
+		delete from schoolmatchtest
+		where schoolmatch_seq = #{schoolmatch_seq}
+	</delete>
+	
+	<insert id="schoolmatchinsertGD"
+		parameterType="com.docedu.web.user.vo.SchoolmatchVO">
+		insert into
+		schoolmatchtestgd(schoolmatch_name, schoolmatch_school,
+		schoolmatch_grade, schoolmatch_phone1, schoolmatch_phone2, schoolmatch_phone3,
+		schoolmatch_parentphone1, schoolmatch_parentphone2, schoolmatch_parentphone3, schoolmatch_date,
+		schoolmatch_agree, schoolmatch_dongbuk, schoolmatch_boseong, schoolmatch_jamsil,
+		schoolmatch_doonchon, schoolmatch_hanyeong, schoolmatch_yeongpawomen, schoolmatch_changdeokwomen,
+		schoolmatch_prior1, schoolmatch_prior2,
+		schoolmatch_prior3, schoolmatch_prior4, schoolmatch_prior5, schoolmatch_prior, schoolmatch_tendency1, schoolmatch_tendency2,
+		schoolmatch_tendency3, schoolmatch_tendency4, schoolmatch_tendency5, schoolmatch_tendency6,
+		schoolmatch_english1, schoolmatch_english2, schoolmatch_english3, schoolmatch_english4, schoolmatch_english5,
+		schoolmatch_english6, schoolmatch_english7, schoolmatch_english8, schoolmatch_english9, schoolmatch_english10,
+		schoolmatch_math1, schoolmatch_math2, schoolmatch_math3, schoolmatch_math4, schoolmatch_math5,
+		schoolmatch_math6, schoolmatch_math7, schoolmatch_math8, schoolmatch_math9, schoolmatch_math10,
+		schoolmatch_korean1, schoolmatch_korean2, schoolmatch_korean3, schoolmatch_korean4, schoolmatch_korean5,
+		schoolmatch_korean6, schoolmatch_korean7, schoolmatch_korean8, schoolmatch_korean9, schoolmatch_korean10)
+		values(#{schoolmatch_name}, #{schoolmatch_school},
+		#{schoolmatch_grade}, #{schoolmatch_phone1}, #{schoolmatch_phone2}, #{schoolmatch_phone3},
+		#{schoolmatch_parentphone1}, #{schoolmatch_parentphone2}, #{schoolmatch_parentphone3}, #{schoolmatch_date},
+		#{schoolmatch_agree}, #{schoolmatch_dongbuk}, #{schoolmatch_boseong}, #{schoolmatch_jamsil},
+		#{schoolmatch_doonchon}, #{schoolmatch_hanyeong}, #{schoolmatch_yeongpawomen}, #{schoolmatch_changdeokwomen},
+		#{schoolmatch_prior1}, #{schoolmatch_prior2},
+		#{schoolmatch_prior3}, #{schoolmatch_prior4}, #{schoolmatch_prior5}, #{schoolmatch_prior}, #{schoolmatch_tendency1}, #{schoolmatch_tendency2},
+		#{schoolmatch_tendency3}, #{schoolmatch_tendency4}, #{schoolmatch_tendency5}, #{schoolmatch_tendency6},
+		#{schoolmatch_english1}, #{schoolmatch_english2}, #{schoolmatch_english3}, #{schoolmatch_english4}, #{schoolmatch_english5},
+		#{schoolmatch_english6}, #{schoolmatch_english7}, #{schoolmatch_english8}, #{schoolmatch_english9}, #{schoolmatch_english10},
+		#{schoolmatch_math1}, #{schoolmatch_math2}, #{schoolmatch_math3}, #{schoolmatch_math4}, #{schoolmatch_math5},
+		#{schoolmatch_math6}, #{schoolmatch_math7}, #{schoolmatch_math8}, #{schoolmatch_math9}, #{schoolmatch_math10},
+		#{schoolmatch_korean1}, #{schoolmatch_korean2}, #{schoolmatch_korean3}, #{schoolmatch_korean4}, #{schoolmatch_korean5},
+		#{schoolmatch_korean6}, #{schoolmatch_korean7}, #{schoolmatch_korean8}, #{schoolmatch_korean9}, #{schoolmatch_korean10});
+	</insert>
+	<select id="schoolmatchListGD" resultType="com.docedu.web.user.vo.SchoolmatchVO">
+		select * from schoolmatchtestgd order by test_date DESC;
+	</select>
+	<select id="schoolmatchresultGD" resultType="com.docedu.web.user.vo.SchoolmatchVO">
+		select * from schoolmatchtestgd Where schoolmatch_seq = #{schoolmatch_seq};
 	</select>
 </mapper>

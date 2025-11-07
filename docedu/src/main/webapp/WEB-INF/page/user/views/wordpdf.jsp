@@ -22,9 +22,10 @@
         }
         @media print {
             .contentheader {background-color:#FFFF00 !important; -webkit-print-color-adjust:exact;}
-            .bodytrans{font-size: 10pt; transform: scale(0.7); text-align:left; margin-left: -20px; white-space: nowrap;}
-            .bodyword{font-size: 10pt; text-align: left; padding-left: 10px;}
-            .bigword{font-size: 10pt; transform: scale(0.45); text-align:left; margin-left: -40px; white-space: nowrap;}
+            .bodytrans{font-size: 10pt; text-align:left; padding-left: 5px; white-space: nowrap; overflow: hidden;}
+            .bodyword{font-size: 10pt; text-align: left; padding-left: 5px; overflow: hidden;}
+            .bodyclass{overflow: hidden;}
+            /* .bigword{font-size: 10pt; transform: scale(0.45); text-align:left; margin-left: -40px; white-space: nowrap;} */
         }
         .insertname{
             width:100%;
@@ -63,7 +64,9 @@
             height: 85%;
             left: 5%;
             top: 10.5%;
-            border: 1px solid #12887A;
+            border-top: 1px solid #12887A;
+            border-left: 1px solid #12887A;
+            border-right: 1px solid #12887A;
             text-align: center;
         }
         .wordcontent2{
@@ -72,7 +75,9 @@
             height: 85%;
             right: 5%;
             top: 10.5%;
-            border: 1px solid #12887A;
+            border-top: 1px solid #12887A;
+            border-left: 1px solid #12887A;
+            border-right: 1px solid #12887A;
             text-align: center;
         }
         .contentheader{
@@ -89,7 +94,13 @@
             color: #12887A;
         }
         .headerword{
-            width: 40%;
+            width: 30%;
+            border-right: 1px solid #12887A;
+            line-height: 4.6875vw;
+            color: #12887A;
+        }
+        .headerclass{
+            width: 10%;
             border-right: 1px solid #12887A;
             line-height: 4.6875vw;
             color: #12887A;
@@ -115,14 +126,21 @@
             font-size: 1.2vw;
         }
         .bodyword{
-            width: 40%;
+            width: 30%;
             border-right: 1px solid #12887A;
             line-height: 3.7396vw;
-            font-size: 1.2vw;
+            font-size: 1.08vw;
+        }
+        .bodyclass{
+            width: 10%;
+            border-right: 1px solid #12887A;
+            line-height: 3.7396vw;
+            font-size: 1.08vw;
         }
         .bodytrans{
             width: 50%;
             line-height: 3.7396vw;
+            font-size: 1.08vw;
         }
         </style>
 </head>
@@ -132,6 +150,7 @@
 			<tr>
 				<td>제목</td>
 				<td>단어</td>
+                <td>품사</td>
 				<td>해석</td>
 			</tr>
 		</thead>
@@ -139,6 +158,7 @@
 			<tr>
 				<td><c:out value="${list.wpdf_header}" /></td>
 				<td><c:out value="${list.wpdf_name}" /></td>
+                <td><c:out value="${list.wpdf_class}" /></td>
 				<td><c:out value="${list.wpdf_trans}" /></td>
 			</tr>
 		</c:forEach>
@@ -166,6 +186,9 @@
                 <div class="headerword">
                     영단어
                 </div>
+                <div class="headerclass">
+                    품사
+                </div>
                 <div class="headertrans">
                     한글의미
                 </div>
@@ -180,6 +203,9 @@
                 </div>
                 <div class="headerword">
                     영단어
+                </div>
+                <div class="headerclass">
+                    품사
                 </div>
                 <div class="headertrans">
                     한글의미
@@ -229,6 +255,9 @@
 		                <div class='headerword'>\
 		                    영단어\
 		                </div>\
+                        <div class='headerclass'>\
+                            품사\
+                        </div>\
 		                <div class='headertrans'>\
 		                    한글의미\
 		                </div>\
@@ -244,6 +273,9 @@
 		                <div class='headerword'>\
 		                    영단어\
 		                </div>\
+                        <div class='headerclass'>\
+                            품사\
+                        </div>\
 		                <div class='headertrans'>\
 		                    한글의미\
 		                </div>\
@@ -255,13 +287,15 @@
                 document.getElementsByClassName("contentbody")[0].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\
                     <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=m){
                     document.getElementsByClassName("contentbody")[1].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\
+                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*2)){
@@ -276,13 +310,14 @@
                 document.getElementsByClassName("contentbody")[2].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
+                        <div class='bodyclass'>"+result[j]["품사"]+"</div>\
                         <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=90){
                     document.getElementsByClassName("contentbody")[3].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*4)){
@@ -297,13 +332,13 @@
                 document.getElementsByClassName("contentbody")[4].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*5)){
                     document.getElementsByClassName("contentbody")[5].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*6)){
@@ -318,13 +353,13 @@
                 document.getElementsByClassName("contentbody")[6].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*7)){
                     document.getElementsByClassName("contentbody")[7].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*8)){
@@ -339,13 +374,13 @@
                 document.getElementsByClassName("contentbody")[8].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*9)){
                     document.getElementsByClassName("contentbody")[9].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*10)){
@@ -361,14 +396,14 @@
                 document.getElementsByClassName("contentbody")[10].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*11)){
                     
                     document.getElementsByClassName("contentbody")[11].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*12)){
@@ -384,14 +419,14 @@
                 document.getElementsByClassName("contentbody")[12].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*13)){
                     
                     document.getElementsByClassName("contentbody")[13].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*14)){
@@ -407,14 +442,14 @@
                 document.getElementsByClassName("contentbody")[14].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*15)){
                     
                     document.getElementsByClassName("contentbody")[15].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*16)){
@@ -430,14 +465,14 @@
                 document.getElementsByClassName("contentbody")[16].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*17)){
                     
                     document.getElementsByClassName("contentbody")[17].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*18)){
@@ -453,14 +488,14 @@
                 document.getElementsByClassName("contentbody")[18].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*19)){
                     
                     document.getElementsByClassName("contentbody")[19].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*20)){
@@ -476,14 +511,14 @@
                 document.getElementsByClassName("contentbody")[20].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*21)){
                     
                     document.getElementsByClassName("contentbody")[21].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*22)){
@@ -499,14 +534,14 @@
                 document.getElementsByClassName("contentbody")[22].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*23)){
                     
                     document.getElementsByClassName("contentbody")[23].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*24)){
@@ -522,14 +557,14 @@
                 document.getElementsByClassName("contentbody")[24].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*25)){
                     
                     document.getElementsByClassName("contentbody")[25].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*26)){
@@ -545,14 +580,14 @@
                 document.getElementsByClassName("contentbody")[26].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*27)){
                     
                     document.getElementsByClassName("contentbody")[27].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*28)){
@@ -568,14 +603,14 @@
                 document.getElementsByClassName("contentbody")[28].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*29)){
                     
                     document.getElementsByClassName("contentbody")[29].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*30)){
@@ -591,14 +626,14 @@
                 document.getElementsByClassName("contentbody")[30].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*31)){
                     
                     document.getElementsByClassName("contentbody")[31].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*32)){
@@ -614,14 +649,14 @@
                 document.getElementsByClassName("contentbody")[32].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*33)){
                     
                     document.getElementsByClassName("contentbody")[33].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*34)){
@@ -637,14 +672,14 @@
                 document.getElementsByClassName("contentbody")[34].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*35)){
                     
                     document.getElementsByClassName("contentbody")[35].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*36)){
@@ -660,14 +695,14 @@
                 document.getElementsByClassName("contentbody")[36].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*37)){
                     
                     document.getElementsByClassName("contentbody")[37].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*38)){
@@ -683,14 +718,14 @@
                 document.getElementsByClassName("contentbody")[38].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*39)){
                     
                     document.getElementsByClassName("contentbody")[39].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*40)){
@@ -706,14 +741,14 @@
                 document.getElementsByClassName("contentbody")[40].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*41)){
                     
                     document.getElementsByClassName("contentbody")[41].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*42)){
@@ -729,14 +764,14 @@
                 document.getElementsByClassName("contentbody")[42].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*43)){
                     
                     document.getElementsByClassName("contentbody")[43].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*44)){
@@ -752,14 +787,14 @@
                 document.getElementsByClassName("contentbody")[44].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*45)){
                     
                     document.getElementsByClassName("contentbody")[45].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*46)){
@@ -775,14 +810,14 @@
                 document.getElementsByClassName("contentbody")[46].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*47)){
                     
                     document.getElementsByClassName("contentbody")[47].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*48)){
@@ -798,14 +833,14 @@
                 document.getElementsByClassName("contentbody")[48].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*49)){
                     
                     document.getElementsByClassName("contentbody")[49].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*50)){
@@ -821,14 +856,14 @@
                 document.getElementsByClassName("contentbody")[50].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*51)){
                     
                     document.getElementsByClassName("contentbody")[51].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*52)){
@@ -844,14 +879,14 @@
                 document.getElementsByClassName("contentbody")[52].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*53)){
                     
                     document.getElementsByClassName("contentbody")[53].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*54)){
@@ -867,14 +902,14 @@
                 document.getElementsByClassName("contentbody")[54].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*55)){
                     
                     document.getElementsByClassName("contentbody")[55].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*56)){
@@ -890,14 +925,14 @@
                 document.getElementsByClassName("contentbody")[56].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*57)){
                     
                     document.getElementsByClassName("contentbody")[57].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*58)){
@@ -913,14 +948,14 @@
                 document.getElementsByClassName("contentbody")[58].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*59)){
                     
                     document.getElementsByClassName("contentbody")[59].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*60)){
@@ -936,14 +971,14 @@
                 document.getElementsByClassName("contentbody")[60].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*61)){
                     
                     document.getElementsByClassName("contentbody")[61].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*62)){
@@ -959,14 +994,14 @@
                 document.getElementsByClassName("contentbody")[62].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*63)){
                     
                     document.getElementsByClassName("contentbody")[63].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*64)){
@@ -982,14 +1017,14 @@
                 document.getElementsByClassName("contentbody")[64].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*65)){
                     
                     document.getElementsByClassName("contentbody")[65].innerHTML += "<div class='bodycontent'>\
                         <div class='bodynum'>"+k+"</div>\
                         <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                        <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                     </div>";
                 }
                 if(j>=(m*66)){
@@ -1005,13 +1040,13 @@
                 document.getElementsByClassName("contentbody")[66].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*67)){
                 document.getElementsByClassName("contentbody")[67].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*68)){
@@ -1027,13 +1062,13 @@
                 document.getElementsByClassName("contentbody")[68].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*69)){
                 document.getElementsByClassName("contentbody")[69].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*70)){
@@ -1049,13 +1084,13 @@
                 document.getElementsByClassName("contentbody")[70].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*71)){
                 document.getElementsByClassName("contentbody")[71].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*72)){
@@ -1071,13 +1106,13 @@
                 document.getElementsByClassName("contentbody")[72].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*73)){
                 document.getElementsByClassName("contentbody")[73].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*74)){
@@ -1093,13 +1128,13 @@
                 document.getElementsByClassName("contentbody")[74].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*75)){
                 document.getElementsByClassName("contentbody")[75].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*76)){
@@ -1115,13 +1150,13 @@
                 document.getElementsByClassName("contentbody")[76].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*77)){
                 document.getElementsByClassName("contentbody")[77].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*78)){
@@ -1137,13 +1172,13 @@
                 document.getElementsByClassName("contentbody")[78].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*79)){
                 document.getElementsByClassName("contentbody")[79].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*80)){
@@ -1159,13 +1194,13 @@
                 document.getElementsByClassName("contentbody")[80].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*81)){
                 document.getElementsByClassName("contentbody")[81].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*82)){
@@ -1181,13 +1216,13 @@
                 document.getElementsByClassName("contentbody")[82].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*83)){
                 document.getElementsByClassName("contentbody")[83].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*84)){
@@ -1203,13 +1238,13 @@
                 document.getElementsByClassName("contentbody")[84].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*85)){
                 document.getElementsByClassName("contentbody")[85].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*86)){
@@ -1225,13 +1260,13 @@
                 document.getElementsByClassName("contentbody")[86].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*87)){
                 document.getElementsByClassName("contentbody")[87].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*88)){
@@ -1247,13 +1282,13 @@
                 document.getElementsByClassName("contentbody")[88].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*89)){
                 document.getElementsByClassName("contentbody")[89].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*90)){
@@ -1269,13 +1304,13 @@
                 document.getElementsByClassName("contentbody")[90].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*91)){
                 document.getElementsByClassName("contentbody")[91].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*92)){
@@ -1291,13 +1326,13 @@
                 document.getElementsByClassName("contentbody")[92].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*93)){
                 document.getElementsByClassName("contentbody")[93].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*94)){
@@ -1313,13 +1348,13 @@
                 document.getElementsByClassName("contentbody")[94].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*95)){
                 document.getElementsByClassName("contentbody")[95].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*96)){
@@ -1335,13 +1370,13 @@
                 document.getElementsByClassName("contentbody")[96].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*97)){
                 document.getElementsByClassName("contentbody")[97].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*98)){
@@ -1357,13 +1392,13 @@
                 document.getElementsByClassName("contentbody")[98].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*99)){
                 document.getElementsByClassName("contentbody")[99].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*100)){
@@ -1379,13 +1414,13 @@
                 document.getElementsByClassName("contentbody")[100].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*101)){
                 document.getElementsByClassName("contentbody")[101].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*102)){
@@ -1401,13 +1436,13 @@
                 document.getElementsByClassName("contentbody")[102].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*103)){
                 document.getElementsByClassName("contentbody")[103].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*104)){
@@ -1423,13 +1458,13 @@
                 document.getElementsByClassName("contentbody")[104].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*105)){
                 document.getElementsByClassName("contentbody")[105].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*106)){
@@ -1445,13 +1480,13 @@
                 document.getElementsByClassName("contentbody")[106].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*107)){
                 document.getElementsByClassName("contentbody")[107].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*108)){
@@ -1467,13 +1502,13 @@
                 document.getElementsByClassName("contentbody")[108].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*109)){
                 document.getElementsByClassName("contentbody")[109].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*110)){
@@ -1489,13 +1524,13 @@
                 document.getElementsByClassName("contentbody")[110].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*111)){
                 document.getElementsByClassName("contentbody")[111].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*112)){
@@ -1511,13 +1546,13 @@
                 document.getElementsByClassName("contentbody")[112].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*113)){
                 document.getElementsByClassName("contentbody")[113].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*114)){
@@ -1533,13 +1568,13 @@
                 document.getElementsByClassName("contentbody")[114].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*115)){
                 document.getElementsByClassName("contentbody")[115].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*116)){
@@ -1555,13 +1590,13 @@
                 document.getElementsByClassName("contentbody")[116].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*117)){
                 document.getElementsByClassName("contentbody")[117].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*118)){
@@ -1577,13 +1612,13 @@
                 document.getElementsByClassName("contentbody")[118].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*119)){
                 document.getElementsByClassName("contentbody")[119].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*120)){
@@ -1599,13 +1634,13 @@
                 document.getElementsByClassName("contentbody")[120].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*121)){
                 document.getElementsByClassName("contentbody")[121].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*122)){
@@ -1621,13 +1656,13 @@
                 document.getElementsByClassName("contentbody")[122].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*123)){
                 document.getElementsByClassName("contentbody")[123].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*124)){
@@ -1643,13 +1678,13 @@
                 document.getElementsByClassName("contentbody")[124].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*125)){
                 document.getElementsByClassName("contentbody")[125].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*126)){
@@ -1665,13 +1700,13 @@
                 document.getElementsByClassName("contentbody")[126].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*127)){
                 document.getElementsByClassName("contentbody")[127].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*128)){
@@ -1687,13 +1722,13 @@
                 document.getElementsByClassName("contentbody")[128].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*129)){
                 document.getElementsByClassName("contentbody")[129].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*130)){
@@ -1709,13 +1744,13 @@
                 document.getElementsByClassName("contentbody")[130].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*131)){
                 document.getElementsByClassName("contentbody")[131].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*132)){
@@ -1731,13 +1766,13 @@
                 document.getElementsByClassName("contentbody")[132].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*133)){
                 document.getElementsByClassName("contentbody")[133].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*134)){
@@ -1753,13 +1788,13 @@
                 document.getElementsByClassName("contentbody")[134].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*135)){
                 document.getElementsByClassName("contentbody")[135].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*136)){
@@ -1775,13 +1810,13 @@
                 document.getElementsByClassName("contentbody")[136].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*137)){
                 document.getElementsByClassName("contentbody")[137].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*138)){
@@ -1797,13 +1832,13 @@
                 document.getElementsByClassName("contentbody")[138].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*139)){
                 document.getElementsByClassName("contentbody")[139].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*140)){
@@ -1819,13 +1854,13 @@
                 document.getElementsByClassName("contentbody")[140].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*141)){
                 document.getElementsByClassName("contentbody")[141].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*142)){
@@ -1841,13 +1876,13 @@
                 document.getElementsByClassName("contentbody")[142].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*143)){
                 document.getElementsByClassName("contentbody")[143].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*144)){
@@ -1863,13 +1898,13 @@
                 document.getElementsByClassName("contentbody")[144].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*145)){
                 document.getElementsByClassName("contentbody")[145].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*146)){
@@ -1885,13 +1920,13 @@
                 document.getElementsByClassName("contentbody")[146].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*147)){
                 document.getElementsByClassName("contentbody")[147].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*148)){
@@ -1907,13 +1942,13 @@
                 document.getElementsByClassName("contentbody")[148].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*149)){
                 document.getElementsByClassName("contentbody")[149].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*150)){
@@ -1929,13 +1964,13 @@
                 document.getElementsByClassName("contentbody")[150].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*151)){
                 document.getElementsByClassName("contentbody")[151].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*152)){
@@ -1951,13 +1986,13 @@
                 document.getElementsByClassName("contentbody")[152].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*153)){
                 document.getElementsByClassName("contentbody")[153].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*154)){
@@ -1973,13 +2008,13 @@
                 document.getElementsByClassName("contentbody")[154].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*155)){
                 document.getElementsByClassName("contentbody")[155].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*156)){
@@ -1995,13 +2030,13 @@
                 document.getElementsByClassName("contentbody")[156].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*157)){
                 document.getElementsByClassName("contentbody")[157].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*158)){
@@ -2017,13 +2052,13 @@
                 document.getElementsByClassName("contentbody")[158].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*159)){
                 document.getElementsByClassName("contentbody")[159].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*160)){
@@ -2039,13 +2074,13 @@
                 document.getElementsByClassName("contentbody")[160].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*161)){
                 document.getElementsByClassName("contentbody")[161].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*162)){
@@ -2061,13 +2096,13 @@
                 document.getElementsByClassName("contentbody")[162].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*163)){
                 document.getElementsByClassName("contentbody")[163].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*164)){
@@ -2083,13 +2118,13 @@
                 document.getElementsByClassName("contentbody")[164].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*165)){
                 document.getElementsByClassName("contentbody")[165].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*166)){
@@ -2105,13 +2140,13 @@
                 document.getElementsByClassName("contentbody")[166].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*167)){
                 document.getElementsByClassName("contentbody")[167].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*168)){
@@ -2127,13 +2162,13 @@
                 document.getElementsByClassName("contentbody")[168].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*169)){
                 document.getElementsByClassName("contentbody")[169].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*170)){
@@ -2149,13 +2184,13 @@
                 document.getElementsByClassName("contentbody")[170].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*171)){
                 document.getElementsByClassName("contentbody")[171].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*172)){
@@ -2171,13 +2206,13 @@
                 document.getElementsByClassName("contentbody")[172].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*173)){
                 document.getElementsByClassName("contentbody")[173].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*174)){
@@ -2193,13 +2228,13 @@
                 document.getElementsByClassName("contentbody")[174].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*175)){
                 document.getElementsByClassName("contentbody")[175].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*176)){
@@ -2215,13 +2250,13 @@
                 document.getElementsByClassName("contentbody")[176].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*177)){
                 document.getElementsByClassName("contentbody")[177].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*178)){
@@ -2237,13 +2272,13 @@
                 document.getElementsByClassName("contentbody")[178].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*179)){
                 document.getElementsByClassName("contentbody")[179].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*180)){
@@ -2259,13 +2294,13 @@
                 document.getElementsByClassName("contentbody")[180].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*181)){
                 document.getElementsByClassName("contentbody")[181].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*182)){
@@ -2281,13 +2316,13 @@
                 document.getElementsByClassName("contentbody")[182].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*183)){
                 document.getElementsByClassName("contentbody")[183].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*184)){
@@ -2303,13 +2338,13 @@
                 document.getElementsByClassName("contentbody")[184].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*185)){
                 document.getElementsByClassName("contentbody")[185].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*186)){
@@ -2325,13 +2360,13 @@
                 document.getElementsByClassName("contentbody")[186].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*187)){
                 document.getElementsByClassName("contentbody")[187].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*188)){
@@ -2347,13 +2382,13 @@
                 document.getElementsByClassName("contentbody")[188].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*189)){
                 document.getElementsByClassName("contentbody")[189].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*190)){
@@ -2369,13 +2404,13 @@
                 document.getElementsByClassName("contentbody")[190].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*191)){
                 document.getElementsByClassName("contentbody")[191].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*192)){
@@ -2391,13 +2426,13 @@
                 document.getElementsByClassName("contentbody")[192].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*193)){
                 document.getElementsByClassName("contentbody")[193].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*194)){
@@ -2413,13 +2448,13 @@
                 document.getElementsByClassName("contentbody")[194].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*195)){
                 document.getElementsByClassName("contentbody")[195].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*196)){
@@ -2435,13 +2470,13 @@
                 document.getElementsByClassName("contentbody")[196].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*197)){
                 document.getElementsByClassName("contentbody")[197].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*198)){
@@ -2457,13 +2492,13 @@
                 document.getElementsByClassName("contentbody")[198].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*199)){
                 document.getElementsByClassName("contentbody")[199].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*200)){
@@ -2479,13 +2514,13 @@
                 document.getElementsByClassName("contentbody")[200].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*201)){
                 document.getElementsByClassName("contentbody")[201].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*202)){
@@ -2501,13 +2536,13 @@
                 document.getElementsByClassName("contentbody")[202].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*203)){
                 document.getElementsByClassName("contentbody")[203].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*204)){
@@ -2523,13 +2558,13 @@
                 document.getElementsByClassName("contentbody")[204].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*205)){
                 document.getElementsByClassName("contentbody")[205].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*206)){
@@ -2545,13 +2580,13 @@
                 document.getElementsByClassName("contentbody")[206].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*207)){
                 document.getElementsByClassName("contentbody")[207].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*208)){
@@ -2567,13 +2602,13 @@
                 document.getElementsByClassName("contentbody")[208].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*209)){
                 document.getElementsByClassName("contentbody")[209].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*210)){
@@ -2589,13 +2624,13 @@
                 document.getElementsByClassName("contentbody")[210].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*211)){
                 document.getElementsByClassName("contentbody")[211].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*212)){
@@ -2611,13 +2646,13 @@
                 document.getElementsByClassName("contentbody")[212].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*213)){
                 document.getElementsByClassName("contentbody")[213].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*214)){
@@ -2633,13 +2668,13 @@
                 document.getElementsByClassName("contentbody")[214].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*215)){
                 document.getElementsByClassName("contentbody")[215].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*216)){
@@ -2655,13 +2690,13 @@
                 document.getElementsByClassName("contentbody")[216].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*217)){
                 document.getElementsByClassName("contentbody")[217].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*218)){
@@ -2677,13 +2712,13 @@
                 document.getElementsByClassName("contentbody")[218].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*219)){
                 document.getElementsByClassName("contentbody")[219].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*220)){
@@ -2699,13 +2734,13 @@
                 document.getElementsByClassName("contentbody")[220].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*221)){
                 document.getElementsByClassName("contentbody")[221].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*222)){
@@ -2721,13 +2756,13 @@
                 document.getElementsByClassName("contentbody")[222].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*223)){
                 document.getElementsByClassName("contentbody")[223].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*224)){
@@ -2743,13 +2778,13 @@
                 document.getElementsByClassName("contentbody")[224].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*225)){
                 document.getElementsByClassName("contentbody")[225].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*226)){
@@ -2765,13 +2800,13 @@
                 document.getElementsByClassName("contentbody")[226].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*227)){
                 document.getElementsByClassName("contentbody")[227].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*228)){
@@ -2787,13 +2822,13 @@
                 document.getElementsByClassName("contentbody")[228].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*229)){
                 document.getElementsByClassName("contentbody")[229].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*230)){
@@ -2809,13 +2844,13 @@
                 document.getElementsByClassName("contentbody")[230].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*231)){
                 document.getElementsByClassName("contentbody")[231].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*232)){
@@ -2831,13 +2866,13 @@
                 document.getElementsByClassName("contentbody")[232].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*233)){
                 document.getElementsByClassName("contentbody")[233].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*234)){
@@ -2853,13 +2888,13 @@
                 document.getElementsByClassName("contentbody")[234].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*235)){
                 document.getElementsByClassName("contentbody")[235].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*236)){
@@ -2875,13 +2910,13 @@
                 document.getElementsByClassName("contentbody")[236].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*237)){
                 document.getElementsByClassName("contentbody")[237].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*238)){
@@ -2897,13 +2932,13 @@
                 document.getElementsByClassName("contentbody")[238].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*239)){
                 document.getElementsByClassName("contentbody")[239].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*240)){
@@ -2919,13 +2954,13 @@
                 document.getElementsByClassName("contentbody")[240].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*241)){
                 document.getElementsByClassName("contentbody")[241].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*242)){
@@ -2941,13 +2976,13 @@
                 document.getElementsByClassName("contentbody")[242].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*243)){
                 document.getElementsByClassName("contentbody")[243].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*244)){
@@ -2963,13 +2998,13 @@
                 document.getElementsByClassName("contentbody")[244].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*245)){
                 document.getElementsByClassName("contentbody")[245].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*246)){
@@ -2985,13 +3020,13 @@
                 document.getElementsByClassName("contentbody")[246].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*247)){
                 document.getElementsByClassName("contentbody")[247].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*248)){
@@ -3007,13 +3042,13 @@
                 document.getElementsByClassName("contentbody")[248].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*249)){
                 document.getElementsByClassName("contentbody")[249].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*250)){
@@ -3029,13 +3064,13 @@
                 document.getElementsByClassName("contentbody")[250].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*251)){
                 document.getElementsByClassName("contentbody")[251].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*252)){
@@ -3051,13 +3086,13 @@
                 document.getElementsByClassName("contentbody")[252].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*253)){
                 document.getElementsByClassName("contentbody")[253].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*254)){
@@ -3073,13 +3108,13 @@
                 document.getElementsByClassName("contentbody")[254].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*255)){
                 document.getElementsByClassName("contentbody")[255].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*256)){
@@ -3095,13 +3130,13 @@
                 document.getElementsByClassName("contentbody")[256].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*257)){
                 document.getElementsByClassName("contentbody")[257].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*258)){
@@ -3117,13 +3152,13 @@
                 document.getElementsByClassName("contentbody")[258].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*259)){
                 document.getElementsByClassName("contentbody")[259].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*260)){
@@ -3139,13 +3174,13 @@
                 document.getElementsByClassName("contentbody")[260].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*261)){
                 document.getElementsByClassName("contentbody")[261].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*262)){
@@ -3161,13 +3196,13 @@
                 document.getElementsByClassName("contentbody")[262].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*263)){
                 document.getElementsByClassName("contentbody")[263].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*264)){
@@ -3183,13 +3218,13 @@
                 document.getElementsByClassName("contentbody")[264].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*265)){
                 document.getElementsByClassName("contentbody")[265].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*266)){
@@ -3205,13 +3240,13 @@
                 document.getElementsByClassName("contentbody")[266].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*267)){
                 document.getElementsByClassName("contentbody")[267].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*268)){
@@ -3227,13 +3262,13 @@
                 document.getElementsByClassName("contentbody")[268].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*269)){
                 document.getElementsByClassName("contentbody")[269].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*270)){
@@ -3249,13 +3284,13 @@
                 document.getElementsByClassName("contentbody")[270].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*271)){
                 document.getElementsByClassName("contentbody")[271].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*272)){
@@ -3271,13 +3306,13 @@
                 document.getElementsByClassName("contentbody")[272].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*273)){
                 document.getElementsByClassName("contentbody")[273].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*274)){
@@ -3293,13 +3328,13 @@
                 document.getElementsByClassName("contentbody")[274].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*275)){
                 document.getElementsByClassName("contentbody")[275].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*276)){
@@ -3315,13 +3350,13 @@
                 document.getElementsByClassName("contentbody")[276].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*277)){
                 document.getElementsByClassName("contentbody")[277].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*278)){
@@ -3337,13 +3372,13 @@
                 document.getElementsByClassName("contentbody")[278].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*279)){
                 document.getElementsByClassName("contentbody")[279].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*280)){
@@ -3359,13 +3394,13 @@
                 document.getElementsByClassName("contentbody")[280].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*281)){
                 document.getElementsByClassName("contentbody")[281].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*282)){
@@ -3381,13 +3416,13 @@
                 document.getElementsByClassName("contentbody")[282].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*283)){
                 document.getElementsByClassName("contentbody")[283].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*284)){
@@ -3403,13 +3438,13 @@
                 document.getElementsByClassName("contentbody")[284].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*285)){
                 document.getElementsByClassName("contentbody")[285].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*286)){
@@ -3425,13 +3460,13 @@
                 document.getElementsByClassName("contentbody")[286].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*287)){
                 document.getElementsByClassName("contentbody")[287].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*288)){
@@ -3447,13 +3482,13 @@
                 document.getElementsByClassName("contentbody")[288].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*289)){
                 document.getElementsByClassName("contentbody")[289].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*290)){
@@ -3469,13 +3504,13 @@
                 document.getElementsByClassName("contentbody")[290].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*291)){
                 document.getElementsByClassName("contentbody")[291].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*292)){
@@ -3491,13 +3526,13 @@
                 document.getElementsByClassName("contentbody")[292].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*293)){
                 document.getElementsByClassName("contentbody")[293].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*294)){
@@ -3513,13 +3548,13 @@
                 document.getElementsByClassName("contentbody")[294].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*295)){
                 document.getElementsByClassName("contentbody")[295].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*296)){
@@ -3535,13 +3570,13 @@
                 document.getElementsByClassName("contentbody")[296].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*297)){
                 document.getElementsByClassName("contentbody")[297].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*298)){
@@ -3557,13 +3592,13 @@
                 document.getElementsByClassName("contentbody")[298].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*299)){
                 document.getElementsByClassName("contentbody")[299].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*300)){
@@ -3579,13 +3614,13 @@
                 document.getElementsByClassName("contentbody")[300].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*301)){
                 document.getElementsByClassName("contentbody")[301].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*302)){
@@ -3601,13 +3636,13 @@
                 document.getElementsByClassName("contentbody")[302].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*303)){
                 document.getElementsByClassName("contentbody")[303].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*304)){
@@ -3623,13 +3658,13 @@
                 document.getElementsByClassName("contentbody")[304].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*305)){
                 document.getElementsByClassName("contentbody")[305].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*306)){
@@ -3645,13 +3680,13 @@
                 document.getElementsByClassName("contentbody")[306].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*307)){
                 document.getElementsByClassName("contentbody")[307].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*308)){
@@ -3667,13 +3702,13 @@
                 document.getElementsByClassName("contentbody")[308].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*309)){
                 document.getElementsByClassName("contentbody")[309].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*310)){
@@ -3689,13 +3724,13 @@
                 document.getElementsByClassName("contentbody")[310].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*311)){
                 document.getElementsByClassName("contentbody")[311].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*312)){
@@ -3711,13 +3746,13 @@
                 document.getElementsByClassName("contentbody")[312].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*313)){
                 document.getElementsByClassName("contentbody")[313].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*314)){
@@ -3733,13 +3768,13 @@
                 document.getElementsByClassName("contentbody")[314].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*315)){
                 document.getElementsByClassName("contentbody")[315].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*316)){
@@ -3755,13 +3790,13 @@
                 document.getElementsByClassName("contentbody")[316].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*317)){
                 document.getElementsByClassName("contentbody")[317].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*318)){
@@ -3777,13 +3812,13 @@
                 document.getElementsByClassName("contentbody")[318].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*319)){
                 document.getElementsByClassName("contentbody")[319].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*320)){
@@ -3799,13 +3834,13 @@
                 document.getElementsByClassName("contentbody")[320].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*321)){
                 document.getElementsByClassName("contentbody")[321].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*322)){
@@ -3821,13 +3856,13 @@
                 document.getElementsByClassName("contentbody")[322].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*323)){
                 document.getElementsByClassName("contentbody")[323].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*324)){
@@ -3843,13 +3878,13 @@
                 document.getElementsByClassName("contentbody")[324].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*325)){
                 document.getElementsByClassName("contentbody")[325].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*326)){
@@ -3865,13 +3900,13 @@
                 document.getElementsByClassName("contentbody")[326].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*327)){
                 document.getElementsByClassName("contentbody")[327].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*328)){
@@ -3887,13 +3922,13 @@
                 document.getElementsByClassName("contentbody")[328].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*329)){
                 document.getElementsByClassName("contentbody")[329].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*330)){
@@ -3909,13 +3944,13 @@
                 document.getElementsByClassName("contentbody")[330].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*331)){
                 document.getElementsByClassName("contentbody")[331].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*332)){
@@ -3931,13 +3966,13 @@
                 document.getElementsByClassName("contentbody")[332].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*333)){
                 document.getElementsByClassName("contentbody")[333].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*334)){
@@ -3953,13 +3988,13 @@
                 document.getElementsByClassName("contentbody")[334].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 if(j>=(m*335)){
                 document.getElementsByClassName("contentbody")[335].innerHTML += "<div class='bodycontent'>\
                     <div class='bodynum'>"+k+"</div>\
                     <div class='bodyword'>"+result[j]["단어"]+"</div>\
-                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
+                    <div class='bodyclass'>"+result[j]["품사"]+"</div>\                    <div class='bodytrans'>"+ result[j]["해석"] +"</div>\
                 </div>";
                 }
                 if(j>=(m*336)){

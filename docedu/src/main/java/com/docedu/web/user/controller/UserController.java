@@ -27,6 +27,10 @@ public class UserController {
 	public String userloginGet() {
 		return "userlogin";
 	}
+	@GetMapping("testpdf.do")
+	public String testpdfGet() {
+		return "testpdf";
+	}
 	@GetMapping("/usersignin.do")
 	public String userGet() {
 		return "usersignin";

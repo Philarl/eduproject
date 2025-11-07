@@ -1,6 +1,7 @@
 package com.docedu.web.user.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,6 @@ import com.docedu.web.user.vo.Criteria;
 import com.docedu.web.user.vo.WordpdfVO;
 
 import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log
@@ -79,7 +79,15 @@ public class WordpdfController {
 		return mav;
 	}
 	@GetMapping("/wordpdftest.do")
-	public ModelAndView wordpdftestGet(@RequestParam String wpdf_header) {
+	public ModelAndView wordpdftestGetKr(@RequestParam String wpdf_header) {
+		ModelAndView mav = new ModelAndView();
+		List<Object> wordpdfVO;
+		wordpdfVO = wordpdfService.wordpdfread(wpdf_header);
+		mav.addObject("wpdf_view", wordpdfVO);
+		return mav;
+	}
+	@GetMapping("/wordpdftest30.do")
+	public ModelAndView wordpdftest30Get(@RequestParam String wpdf_header) {
 		ModelAndView mav = new ModelAndView();
 		List<Object> wordpdfVO;
 		wordpdfVO = wordpdfService.wordpdfread(wpdf_header);
@@ -96,5 +104,12 @@ public class WordpdfController {
 	public String wordpdfDelete(@RequestParam String wpdf_header) {
 		wordpdfService.wordpdfdelete(wpdf_header);
 		return "redirect:/wordpdflist.do";
+	}
+	@GetMapping("/test1.do")
+	public void test1(@RequestParam String wpdf_header) {
+		Map map = new HashMap();
+		map.put("wpdf_header", wpdf_header);
+		wordpdfService.wordpdfrandomize(map);
+		System.out.println("done" + wpdf_header);
 	}
 }

@@ -23,4 +23,17 @@ public class SchoolmatchDAO {
 	public SchoolmatchVO schoolmatchresult(int schoolmatch_seq) {
 		return sqlSessionTemplate.selectOne("schoolmatchinfor.schoolmatchresult", schoolmatch_seq);
 	}
+
+	public void schoolmatchinsertGD(SchoolmatchVO schoolmatchVO) {
+		sqlSessionTemplate.insert("schoolmatchinfor.schoolmatchinsertGD",schoolmatchVO);
+	}
+	public List<SchoolmatchVO> schoolmatchlistGD(Criteria cr) {
+		return sqlSessionTemplate.selectList("schoolmatchinfor.schoolmatchListGD", cr);
+	}
+	public SchoolmatchVO schoolmatchresultGD(int schoolmatch_seq) {
+		return sqlSessionTemplate.selectOne("schoolmatchinfor.schoolmatchresultGD", schoolmatch_seq);
+	}
+	public void schoolmatchdelete(int schoolmatch_seq) {
+		sqlSessionTemplate.delete("schoolmatchinfor.schoolmatchdelete", schoolmatch_seq);
+	}
 }

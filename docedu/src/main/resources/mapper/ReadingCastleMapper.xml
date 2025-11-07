@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="readingcastle">
+	<select id="readingcastle" resultType="com.docedu.web.user.vo.ReadingCastleVO">
+		SELECT
+			category, address, q_no, type, name, head, body_img, body, choice_head, choice, kor_1, eng_1, kor_2, eng_2, answer, word
+		FROM
+			reading_castle
+		WHERE
+			address=#{address}
+	</select>
+</mapper>

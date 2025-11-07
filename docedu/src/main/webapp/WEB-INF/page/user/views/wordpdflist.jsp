@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	a {
+		/* text-decoration: none; */
+		color: black;
+	}
+</style>
 </head>
 <body>
 	<table>
@@ -15,10 +21,10 @@
 		</tr>
 		<c:forEach var="list" items="${WordpdfList}" varStatus="status">
 			<tr>
-				<td onclick="location.href='wordpdf.do?wpdf_header=${list.wpdf_header}'">
+				<td onclick="location.href='wordpdf.do?wpdf_header=${list.wpdf_header}'" style="text-decoration: underline;">
 					<c:out value="${list.wpdf_header}" />
 				</td>
-				<td onclick="location.href='wordpdfdelete.do?wpdf_header=${list.wpdf_header}'">삭제</td>
+				<td onclick="location.href='wordpdfdelete.do?wpdf_header=${list.wpdf_header}'" style="text-decoration: underline;">삭제</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -29,8 +35,9 @@
 		</tr>
 		<c:forEach var="list" items="${WordpdfList}" varStatus="status">
 			<tr>
-				<td onclick="location.href='wordpdftest.do?wpdf_header=${list.wpdf_header}'">
+				<td>
 					<c:out value="${list.wpdf_header}" />
+					<a href="wordpdftest.do?wpdf_header=${list.wpdf_header}">시험지</a>
 				</td>
 			</tr>
 		</c:forEach>

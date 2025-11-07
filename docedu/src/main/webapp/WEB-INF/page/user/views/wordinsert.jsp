@@ -65,7 +65,7 @@
 		        contentType: 'application/json',
 		        success: function(data) {
 		        	alert("success!");
-		        	location.href = "/wordpdflist.do";
+		        	location.href = "/wordpdflist30.do";
 		        }
 		    });
 		};

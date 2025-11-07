@@ -1,6 +1,7 @@
 package com.docedu.web.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,13 @@ public class TendencyServiceImpl implements TendencyService {
 	@Override
 	public TendencyVO tendencyresult(int tendency_seq) {
 		return tendencyDAO.tendencyresult(tendency_seq);
+	}
+	@Override
+	public void tendencyGetNext(Map map) {
+		tendencyDAO.tendencyGetNext(map);
+	}
+	@Override
+	public void tendencydelete(int tendency_seq) {
+		tendencyDAO.tendencydelete(tendency_seq);
 	}
 }

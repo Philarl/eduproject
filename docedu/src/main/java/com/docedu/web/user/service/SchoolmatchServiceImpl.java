@@ -25,4 +25,21 @@ public class SchoolmatchServiceImpl implements SchoolmatchService {
 	public SchoolmatchVO schoolmatchresult(int schoolmatch_seq) {
 		return schoolmatchDAO.schoolmatchresult(schoolmatch_seq);
 	}
+	@Override
+	public void schoolmatchdelete(int schoolmatch_seq) {
+		schoolmatchDAO.schoolmatchdelete(schoolmatch_seq);
+	}
+
+	@Override
+	public void schoolmatchInsertGD(SchoolmatchVO schoolmatchVO) {
+		schoolmatchDAO.schoolmatchinsertGD(schoolmatchVO);
+	}
+	@Override
+	public List<SchoolmatchVO> schoolmatchlistGD(Criteria cr) {
+		return schoolmatchDAO.schoolmatchlistGD(cr);
+	}
+	@Override
+	public SchoolmatchVO schoolmatchresultGD(int schoolmatch_seq) {
+		return schoolmatchDAO.schoolmatchresultGD(schoolmatch_seq);
+	}
 }

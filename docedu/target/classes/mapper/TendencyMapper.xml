@@ -36,9 +36,44 @@
 		#{tendency_e18}, #{tendency_e19});
 	</insert>
 	<select id="tendencyList" resultType="com.docedu.web.user.vo.TendencyVO">
-		select * from tendencytest;
+		select * from tendencytest order by test_date DESC;
 	</select>
 	<select id="tendencyresult" resultType="com.docedu.web.user.vo.TendencyVO">
 		select * from tendencytest Where tendency_seq = #{tendency_seq};
 	</select>
+	<update id="tendencyGetNext">
+		update tendencytest
+		set
+			<if test="aval != null">
+			tendency_${aval} = 0,
+			</if>
+			<if test="aval2 != null">
+			tendency_${aval2} = 0,
+			</if>
+			<if test="hval != null">
+			tendency_${hval} = 0,
+			</if>
+			<if test="hval2 != null">
+			tendency_${hval2} = 0,
+			</if>
+			<if test="rval != null">
+			tendency_${rval} = 0,
+			</if>
+			<if test="rval2 != null">
+			tendency_${rval2} = 0,
+			</if>
+			<if test="eval != null">
+			tendency_${eval} = 0,
+			</if>
+			<if test="eval2 != null">
+			tendency_${eval2} = 0,
+			</if>
+			tendency_seq = #{tendency_seq}
+		where tendency_seq = #{tendency_seq};
+	</update>
+	
+	<delete id="tendencydelete">
+		delete from tendencytest
+		where tendency_seq = #{tendency_seq};
+	</delete>
 </mapper>

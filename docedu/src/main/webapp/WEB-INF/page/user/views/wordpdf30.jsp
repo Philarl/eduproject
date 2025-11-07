@@ -24,8 +24,9 @@
         @media print {
             /* body {width: 3508px; height: 2480px;} */
             .contentheader {background-color:#FFFF00 !important; -webkit-print-color-adjust:exact;}
-            .bodytrans{font-size: 10pt; transform: scale(0.7); text-align:left; margin-left: -20px; white-space: nowrap;}
-            .bodyword{font-size: 10pt; text-align: left; padding-left: 10px;}
+            .bodytrans{font-size: 10pt; text-align:left; padding-left: 10px; white-space: nowrap; overflow: hidden;}
+            .bodyword{font-size: 10pt; text-align: left; padding-left: 10px; white-space: nowrap; overflow: hidden;}
+            .bodyclass{font-size: 10pt; white-space: nowrap; overflow: hidden;}
             .bigword{font-size: 10pt; transform: scale(0.45); text-align:left; margin-left: -40px; white-space: nowrap;}
         }
         .insertname{
@@ -47,10 +48,10 @@
         }
         .headnamearea{
             position:absolute;
-            left: 70%;
-            top:35%;
-            font-size: 9.5vw;
-            color: #12887A;
+            left: 83.25%;
+            top: 20.5%;
+            font-size: 4.5vw;
+            color: #00665a;
         }
         .namearea{
             position:absolute;
@@ -91,7 +92,7 @@
             color: #12887A;
         }
         .headerword{
-            width: 40%;
+            width: 30%;
             border-right: 1px solid #12887A;
             line-height: 2.1vw;
             color: #12887A;
@@ -103,7 +104,7 @@
             color: #12887A;
         }
         .headertrans{
-            width: 40%;
+            width: 50%;
             line-height: 2.1vw;
             color: #12887A;
         }
@@ -123,21 +124,21 @@
             font-size: 1.5vw;
         }
         .bodyword{
-            width: 40%;
+            width: 30%;
             border-right: 1px solid #12887A;
             line-height: 4vw;
-            font-size: 1.5vw;
+            display: table-cell;
         }
         .bodyclass{
             width: 10%;
             border-right: 1px solid #12887A;
             line-height: 4vw;
-            font-size: 1.5vw;
+            display: table-cell;
         }
         .bodytrans{
-            width: 40%;
+            width: 50%;
             line-height: 4vw;
-            font-size: 1.5vw;
+            display: table-cell;
         }
         </style>
 </head>

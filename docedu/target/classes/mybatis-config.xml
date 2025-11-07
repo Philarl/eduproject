@@ -21,6 +21,7 @@
 		<typeAlias alias="TransVO" type="com.docedu.web.admin.vo.TransVO"/>
 		<typeAlias alias="ImsiVO" type="com.docedu.web.user.vo.ImsiVO"/>
 		<typeAlias alias="WordcollectionVO" type="com.docedu.web.user.vo.WordcollectionVO"/>
+		<typeAlias alias="ReadingCastleVO" type="com.docedu.web.user.vo.ReadingCastleVO"/>
 	</typeAliases>
 	
 	<mappers>
@@ -40,5 +41,6 @@
 		<mapper resource="mapper/TransMapper.xml"/>
 		<mapper resource="mapper/ImsiMapper.xml"/>
 		<mapper resource="mapper/WordcollectionMapper.xml"/>
+		<mapper resource="mapper/ReadingCastleMapper.xml"/>
 	</mappers>
 </configuration>

@@ -8,14 +8,6 @@
 p{
 	margin-bottom:0 !important;
 }
-body{
-    display: grid;
-    grid-template-columns: 12% 88%;
-}
-.menubody{
-    background-color: #2AC3B4;
-    opacity: 0.11;
-}
 img{
 	width:100%;
 	vertical-align:middle;

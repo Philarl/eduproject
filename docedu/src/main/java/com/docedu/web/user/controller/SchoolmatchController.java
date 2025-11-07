@@ -54,4 +54,37 @@ public class SchoolmatchController {
 		mav.addObject("schoolmatchresult", schoolmatchVO);
 		return mav;
 	}
+	@RequestMapping("schoolmatchdelete.do")
+	public String schoolmatchdelete(@RequestParam int schoolmatch_seq) {
+		schoolmatchService.schoolmatchdelete(schoolmatch_seq);
+		return "redirect:/schoolmatchlist.do";
+	}
+	
+	
+	@GetMapping("/schoolmatchtestGD.do")
+	public void schoolmatchtestGetGD() {
+		
+	}
+	@RequestMapping(value = "/insertschoolmatchGD.do", method = RequestMethod.POST)
+	public String schoolmatchinsertGetGD(@ModelAttribute SchoolmatchVO schoolmatchVO) {
+		schoolmatchService.schoolmatchInsertGD(schoolmatchVO);
+		return "redirect:/schoolmatchlistGD.do";
+	}
+	@RequestMapping(value = "/schoolmatchlistGD.do")
+	public ModelAndView schoolmatchlistGetGD(Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Criteria Criteria = null;
+		List<SchoolmatchVO> schoolmatchList = new ArrayList<SchoolmatchVO>();
+		schoolmatchList = schoolmatchService.schoolmatchlistGD(Criteria);
+		mav.addObject("SchoolmatchList", schoolmatchList);
+		return mav;
+	}
+	@RequestMapping("schoolmatchresultGD.do")
+	public ModelAndView schoolmatchresultGetGD(@RequestParam int schoolmatch_seq) {
+		ModelAndView mav = new ModelAndView();
+		SchoolmatchVO schoolmatchVO;
+		schoolmatchVO = schoolmatchService.schoolmatchresultGD(schoolmatch_seq);
+		mav.addObject("schoolmatchresult", schoolmatchVO);
+		return mav;
+	}
 }

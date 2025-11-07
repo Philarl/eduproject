@@ -1,7 +1,9 @@
 package com.docedu.web.user.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,7 +21,10 @@ import com.docedu.web.user.service.TendencyService;
 import com.docedu.web.user.vo.Criteria;
 import com.docedu.web.user.vo.TendencyVO;
 
+import lombok.extern.java.Log;
+
 @Controller
+@Log
 public class TendencyController {
 	@Autowired
 	private final TendencyService tendencyService;
@@ -55,5 +60,39 @@ public class TendencyController {
 		tendencyVO = tendencyService.tendencyresult(tendency_seq);
 		mav.addObject("tendencyresult", tendencyVO);
 		return mav;
+	}
+	@RequestMapping("/tendencyGetNext.do")
+	public ModelAndView tendencyresultGetNext(@RequestParam int tendency_seq, @RequestParam String aval, @RequestParam String aval2,
+			@RequestParam String hval, @RequestParam String hval2, @RequestParam String rval, @RequestParam String rval2,
+			@RequestParam String eval, @RequestParam String eval2) {
+		Map map = new HashMap();
+		map.put("tendency_seq", tendency_seq);
+		if(aval != "") {
+			map.put("aval", aval);
+			map.put("aval2", aval2);
+		}
+		if(hval != "") {
+			map.put("hval", hval);
+			map.put("hval2", hval2);
+		}
+		if(rval != "") {
+			map.put("rval", rval);
+			map.put("rval2", rval2);
+		}
+		if(eval != "") {
+			map.put("eval", eval);
+			map.put("eval2", eval2);
+		}
+		log.info(map.toString());
+		tendencyService.tendencyGetNext(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("tendency_seq", tendency_seq);
+		return mav;
+	}
+	@RequestMapping("/tendencydelete.do")
+	public String tendencydelete(@RequestParam int tendency_seq) {
+		tendencyService.tendencydelete(tendency_seq);
+		return "redirect:/tendencyboard.do";
 	}
 }

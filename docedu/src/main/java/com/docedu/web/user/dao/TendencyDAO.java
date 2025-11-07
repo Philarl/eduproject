@@ -1,6 +1,7 @@
 package com.docedu.web.user.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,13 @@ public class TendencyDAO {
 	}
 	public TendencyVO tendencyresult(int tendency_seq) {
 		return sqlSessionTemplate.selectOne("tendencyinfor.tendencyresult", tendency_seq);
+	}
+	
+	public void tendencyGetNext(Map map) {
+		sqlSessionTemplate.update("tendencyinfor.tendencyGetNext", map);
+	}
+	
+	public void tendencydelete(int tendency_seq) {
+		sqlSessionTemplate.update("tendencyinfor.tendencydelete", tendency_seq);
 	}
 }

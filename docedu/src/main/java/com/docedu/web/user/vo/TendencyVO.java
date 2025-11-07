@@ -1,5 +1,7 @@
 package com.docedu.web.user.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -67,4 +69,5 @@ public class TendencyVO {
 	private float tendency_e17;
 	private float tendency_e18;
 	private float tendency_e19;
+	private Date test_date;
 }

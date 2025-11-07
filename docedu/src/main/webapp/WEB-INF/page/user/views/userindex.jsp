@@ -273,7 +273,7 @@ p.btn_next {
 	        <div class="dropdowncontent">
 	            <p style="margin-top:10px;"><span onclick="location.href='grammarlist.do';">독해</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>문법</span> </p>
 	            <p style="margin-top:10px;"><span>듣기</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>내신</span></p>
-	            <p style="margin-top:10px;"><span onclick="location.href='translist.do'">영작</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="location.href='wordpdflist.do';">단어</span></p>
+	            <p style="margin-top:10px;"><span onclick="location.href='translist.do'">영작</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="location.href='wordpdflist30.do';">단어</span></p>
 	            <p style="margin-top:10px;">파닉스</p>
 	            <p style="margin-top:10px;">실전수능모의고사</p>
 	        </div>

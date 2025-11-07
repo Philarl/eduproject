@@ -232,7 +232,7 @@
 						</tr>
 						<tr>
 							<td>26</td>
-							<td>자발적이지 않으면 공부의욕이 전 생기지 않는다</td>
+							<td>자발적이지 않으면 공부의욕이 전혀 생기지 않는다</td>
 							<td><input type="range" id="range26" min="1" max="10" value="1"></td>
 						</tr>
 						<tr>
@@ -808,11 +808,12 @@
         					tendency_e19 : e19
         				},
         				success : function(data) {
-        					alert("success!");
-        					window.location.href = "tendencyboard.do";
+        					alert("검사가 종료되었습니다! 참여해주셔서 감사합니다.");
+							location.href = "http://doctoredu.co.kr/";
+        					// window.location.href = "tendencyboard.do";
         			     },
         				error : function() {
-        					alert("error");
+        					alert("에러가 발생했습니다.");
         				}
         			});
     			}

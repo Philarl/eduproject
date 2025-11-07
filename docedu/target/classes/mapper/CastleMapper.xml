@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="castle">
+	<select id="grammarcastledetail" resultType="com.docedu.web.user.vo.GrammarCastleDetailVO">
+		SELECT
+			castle_detail.cno, castle_detail.col, castle_detail.q_no, castle_detail.correct
+		FROM
+			castle_detail left join castle_case
+		ON
+			castle_detail.cno = castle_case.cno
+		WHERE
+			castle_case.name = #{name} AND
+			castle_case.school = #{school} AND
+			castle_case.grade = #{grade} AND
+			castle_case.birthdate = #{birthdate}
+	</select>
+	
+	<select id="readingcastledetail" resultType="com.docedu.web.user.vo.CastleDetailVO">
+		SELECT
+			cno, name, school, grade, birthdate, testdate, category, q_no, correct
+		FROM
+			castle_detail
+		WHERE
+			name = #{name} AND
+			school = #{school} AND
+			grade = #{grade} AND
+			birthdate = #{birthdate} AND
+			category = #{category}
+	</select>
+	
+	<insert id="readingcastleinsert">
+		INSERT INTO castle_detail
+			(cno, name, school, grade, birthdate, testdate, category, q_no, correct)
+		VALUES
+			(1, #{name}, #{school}, #{grade}, #{birthdate}, sysdate, 'R', #{q_no}, #{correct})
+	</insert>
+</mapper>

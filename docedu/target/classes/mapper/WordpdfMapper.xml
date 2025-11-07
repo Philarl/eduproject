@@ -12,7 +12,7 @@
 		</foreach>
 	</insert>
 	<select id="wordpdfview" resultType="com.docedu.web.user.vo.WordpdfVO">
-		select * from wordpdf Where wpdf_header = #{wpdf_header};
+		select DISTINCT wpdf_name, wpdf_seq, wpdf_header, wpdf_trans, wpdf_class from wordpdf Where wpdf_header = #{wpdf_header};
 	</select>
 	<select id="wordpdfviewList" resultType="com.docedu.web.user.vo.WordpdfVO">
 		select distinct wpdf_header from wordpdf;
@@ -23,4 +23,21 @@
 		where
 			wpdf_header = #{wpdf_header};
 	</delete>
+	
+	<select id="wordpdfrandomize" parameterType="hashmap" resultType="com.docedu.web.user.vo.WordpdfVO">
+		SELECT DISTINCT wpdf_name, ROWNUM, wpdf_seq, wpdf_header, wpdf_trans, wpdf_class
+		FROM
+			(SELECT @ROWNUM:=@ROWNUM+1 AS ROWNUM, wpdf_seq, wpdf_header, wpdf_name, wpdf_trans, wpdf_class
+			FROM edu.wordpdf, (SELECT @ROWNUM:=0) AS R
+			WHERE wpdf_header = #{wpdf_header}) AS N
+		WHERE ROWNUM BETWEEN #{start} AND #{end}
+		ORDER BY RAND(4321)
+	</select>
+	
+	<insert id="insertRandom" parameterType="hashmap">
+		INSERT INTO edu.wordpdf
+			(wpdf_header, wpdf_name, wpdf_trans, wpdf_class)
+		VALUES
+			(CONCAT(#{wpdf_header}, '-1'), #{wpdf_name}, #{wpdf_trans}, #{wpdf_class})
+	</insert>
 </mapper>
